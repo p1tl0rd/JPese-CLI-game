@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
   "created_at": "2026-08-08T03:50:13.485968+00:00",
-  "updated_at": "2026-08-08T04:05:23.086791+00:00",
-  "session_id": "20260808035013-006a99",
-  "session_count": 1,
-  "total_study_seconds": 909.601,
-  "xp": 1104,
-  "streak": 22,
-  "best_streak": 22,
+  "updated_at": "2026-08-08T04:32:12.080813+00:00",
+  "session_id": "20260808043112-3c8b73",
+  "session_count": 4,
+  "total_study_seconds": 1007.188,
+  "xp": 1253,
+  "streak": 25,
+  "best_streak": 25,
   "last_active_date": "2026-08-08",
   "cards": {
     "に": {
@@ -79,16 +79,17 @@
     "そ": {
       "state": "review",
       "learning_step": 3,
-      "review_stage": 0,
-      "next_review_at": "2026-08-08T04:01:12.783297+00:00",
-      "last_reviewed_at": "2026-08-08T04:01:12.783297+00:00",
+      "review_stage": 2,
+      "next_review_at": "2026-08-09T04:31:24.031430+00:00",
+      "last_reviewed_at": "2026-08-08T04:31:24.031430+00:00",
       "introduced_at": "2026-08-08T04:01:12.783297+00:00",
-      "correct_unaided": 4,
+      "correct_unaided": 5,
       "correct_with_hint": 0,
       "wrong_count": 1,
       "lapse_count": 0,
       "session_ids_correct": [
-        "20260808035013-006a99"
+        "20260808035013-006a99",
+        "20260808043112-3c8b73"
       ],
       "recent_results": [
         {
@@ -135,6 +136,15 @@
           "rt_ms": 1350,
           "confusion": null,
           "source": "lesson"
+        },
+        {
+          "ts": "2026-08-08T04:31:24.031430+00:00",
+          "session_id": "20260808043112-3c8b73",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2132,
+          "confusion": null,
+          "source": "review"
         }
       ],
       "response_times_ms": [
@@ -142,14 +152,15 @@
         3831,
         3463,
         2692,
-        1350
+        1350,
+        2132
       ],
       "confused_with": {
         "お": 1
       },
-      "mastery_score": 0.437,
-      "stability": 1.25,
-      "difficulty": 0.53
+      "mastery_score": 0.4913,
+      "stability": 1.45,
+      "difficulty": 0.5
     },
     "み": {
       "state": "new",
@@ -954,16 +965,17 @@
     "ね": {
       "state": "review",
       "learning_step": 3,
-      "review_stage": 0,
-      "next_review_at": "2026-08-08T04:01:12.783297+00:00",
-      "last_reviewed_at": "2026-08-08T04:01:12.783297+00:00",
+      "review_stage": 2,
+      "next_review_at": "2026-08-09T04:31:24.031430+00:00",
+      "last_reviewed_at": "2026-08-08T04:31:24.031430+00:00",
       "introduced_at": "2026-08-08T04:01:12.783297+00:00",
-      "correct_unaided": 3,
+      "correct_unaided": 5,
       "correct_with_hint": 0,
       "wrong_count": 1,
       "lapse_count": 0,
       "session_ids_correct": [
-        "20260808035013-006a99"
+        "20260808035013-006a99",
+        "20260808043112-3c8b73"
       ],
       "recent_results": [
         {
@@ -1001,20 +1013,40 @@
           "rt_ms": 4270,
           "confusion": null,
           "source": "lesson"
+        },
+        {
+          "ts": "2026-08-08T04:31:24.031430+00:00",
+          "session_id": "20260808043112-3c8b73",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 3507,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-08T04:31:24.031430+00:00",
+          "session_id": "20260808043112-3c8b73",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 7429,
+          "confusion": null,
+          "source": "review"
         }
       ],
       "response_times_ms": [
         286,
         2518,
         2438,
-        4270
+        4270,
+        3507,
+        7429
       ],
       "confused_with": {
         "あ": 1
       },
-      "mastery_score": 0.372,
-      "stability": 0.95,
-      "difficulty": 0.56
+      "mastery_score": 0.4873,
+      "stability": 1.35,
+      "difficulty": 0.5
     },
     "し": {
       "state": "new",
@@ -1119,15 +1151,16 @@
       "state": "review",
       "learning_step": 3,
       "review_stage": 0,
-      "next_review_at": "2026-08-08T03:55:48.412804+00:00",
-      "last_reviewed_at": "2026-08-08T03:55:48.412804+00:00",
+      "next_review_at": "2026-08-08T04:31:24.031430+00:00",
+      "last_reviewed_at": "2026-08-08T04:31:24.031430+00:00",
       "introduced_at": "2026-08-08T03:52:40.338129+00:00",
-      "correct_unaided": 5,
+      "correct_unaided": 6,
       "correct_with_hint": 0,
       "wrong_count": 1,
       "lapse_count": 0,
       "session_ids_correct": [
-        "20260808035013-006a99"
+        "20260808035013-006a99",
+        "20260808043112-3c8b73"
       ],
       "recent_results": [
         {
@@ -1183,6 +1216,15 @@
           "rt_ms": 212357,
           "confusion": null,
           "source": "review"
+        },
+        {
+          "ts": "2026-08-08T04:31:24.031430+00:00",
+          "session_id": "20260808043112-3c8b73",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 7581,
+          "confusion": null,
+          "source": "review"
         }
       ],
       "response_times_ms": [
@@ -1191,14 +1233,15 @@
         2012,
         2063,
         5574,
-        212357
+        212357,
+        7581
       ],
       "confused_with": {
         "も": 1
       },
-      "mastery_score": 0.4873,
-      "stability": 1.35,
-      "difficulty": 0.5
+      "mastery_score": 0.5379,
+      "stability": 1.55,
+      "difficulty": 0.47
     },
     "ぬ": {
       "state": "new",
@@ -1303,15 +1346,16 @@
       "state": "review",
       "learning_step": 3,
       "review_stage": 0,
-      "next_review_at": "2026-08-08T04:01:12.783297+00:00",
-      "last_reviewed_at": "2026-08-08T04:01:12.783297+00:00",
+      "next_review_at": "2026-08-08T04:31:24.031430+00:00",
+      "last_reviewed_at": "2026-08-08T04:31:24.031430+00:00",
       "introduced_at": "2026-08-08T04:01:12.783297+00:00",
-      "correct_unaided": 3,
+      "correct_unaided": 4,
       "correct_with_hint": 0,
       "wrong_count": 1,
       "lapse_count": 0,
       "session_ids_correct": [
-        "20260808035013-006a99"
+        "20260808035013-006a99",
+        "20260808043112-3c8b73"
       ],
       "recent_results": [
         {
@@ -1349,20 +1393,30 @@
           "rt_ms": 958,
           "confusion": null,
           "source": "lesson"
+        },
+        {
+          "ts": "2026-08-08T04:31:24.031430+00:00",
+          "session_id": "20260808043112-3c8b73",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 7429,
+          "confusion": null,
+          "source": "review"
         }
       ],
       "response_times_ms": [
         3375,
         1831,
         974,
-        958
+        958,
+        7429
       ],
       "confused_with": {
         "こ": 1
       },
-      "mastery_score": 0.384,
-      "stability": 1.25,
-      "difficulty": 0.56
+      "mastery_score": 0.445,
+      "stability": 1.45,
+      "difficulty": 0.53
     },
     "や": {
       "state": "new",
