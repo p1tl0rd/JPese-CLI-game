@@ -213,10 +213,14 @@ class UI:
     def main_menu(self, save: SaveData, now=None) -> str | None:
         mastered = sum(1 for c in save.cards.values() if c.state is KanaState.MASTERED)
         due = due_count(save, now)
-        learning = sum(1 for c in save.cards.values() if c.state is KanaState.LEARNING)
+        learning = sum(
+            1
+            for c in save.cards.values()
+            if c.state is not KanaState.NEW and c.state is not KanaState.MASTERED
+        )
         self.header(save, now)
         self.say(
-            f"[bold]Hôm nay:[/bold] Kana đến hạn: {due} | Đang học: {learning} | Mastered: {mastered}/46 | Chuỗi ngày: {save.streak}"
+            f"[bold]Hôm nay:[/bold] Kana đến hạn: {due} | Đang học: {learning} | Mastered: {mastered}/46 | Chuỗi ngày: {save.day_streak}"
         )
         lines = [
             ("1", "Tiếp tục buổi học hôm nay"),

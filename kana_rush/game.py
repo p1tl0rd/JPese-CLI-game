@@ -368,7 +368,6 @@ class DailySession:
                 )
             else:
                 count = min(target - introduced_today, len(new_ids), 7)
-                self.rng.shuffle(new_ids)
                 learn_session = LearnSession(
                     self.ui, self.dataset, self.save, self.scheduler, self.rng,
                     self.now, self.session_id, new_ids[:count],

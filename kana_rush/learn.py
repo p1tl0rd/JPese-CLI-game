@@ -10,13 +10,39 @@ from dataclasses import dataclass, field
 from kana_rush.data import KanaDataset
 from kana_rush.models import AnswerSource, KanaState, SaveData
 from kana_rush.scheduler import QuestionPicker, RevisitQueue, Scheduler
+from kana_rush.scoring import level_for_xp
 from kana_rush.session import QuestionRunner
 from kana_rush.ui import UI
 
 COMPLETION_ACCURACY = 0.85
 MIN_CORRECTS_PER_NEW = 2
-BOSS_HP = 50
-BOSS_MAX_QUESTIONS = 10
+BOSS_HP_BASE = 50
+BOSS_HP_PER_LEVEL = 10
+BOSS_HP_PER_MASTERED = 1
+BOSS_MAX_QUESTIONS_BASE = 10
+BOSS_MAX_QUESTIONS_PER_LEVEL = 2
+BOSS_DAMAGE_FAST = 15
+BOSS_DAMAGE_MEDIUM = 10
+BOSS_DAMAGE_SLOW = 6
+
+
+@dataclass(frozen=True)
+class BossStats:
+    hp: int
+    damage_bonus: int
+    max_questions: int
+    level: int
+    mastered: int
+
+
+def boss_stats(save: SaveData) -> BossStats:
+    """Độ khó boss theo level XP và số kana MASTERED."""
+    level = level_for_xp(save.xp)
+    mastered = sum(1 for c in save.cards.values() if c.state is KanaState.MASTERED)
+    hp = BOSS_HP_BASE + (level - 1) * BOSS_HP_PER_LEVEL + mastered * BOSS_HP_PER_MASTERED
+    damage_bonus = (level - 1) // 2 + mastered // 8
+    max_questions = BOSS_MAX_QUESTIONS_BASE + (level - 1) * BOSS_MAX_QUESTIONS_PER_LEVEL
+    return BossStats(hp, damage_bonus, max_questions, level, mastered)
 
 
 @dataclass
@@ -243,9 +269,11 @@ class LearnSession:
         self.ui.say("[bold magenta]GIAI ĐOẠN 5: BOSS ROUND[/bold magenta]")
         old_pool = self._old_pool(max(1, round(len(self.new_ids) * 0.5)))
         pool = list(dict.fromkeys([*self.new_ids, *old_pool]))
-        boss_hp = BOSS_HP
+        stats = boss_stats(self.save)
+        boss_hp_max = stats.hp
+        boss_hp = boss_hp_max
         last_asked: str | None = None
-        for _ in range(BOSS_MAX_QUESTIONS):
+        for _ in range(stats.max_questions):
             picked = self.picker.pick(pool, last_asked=last_asked)
             if picked is None:
                 break
@@ -253,8 +281,9 @@ class LearnSession:
             self.ui.panel(
                 "BOSS",
                 [
-                    f"HP: {self.ui.progress_bar(boss_hp, BOSS_HP)} {boss_hp}/{BOSS_HP}",
-                    "Không có gợi ý. Đúng càng nhanh, damage càng lớn.",
+                    f"HP: {self.ui.progress_bar(boss_hp, boss_hp_max)} {boss_hp}/{boss_hp_max}",
+                    f"Level {stats.level} - Mastered {stats.mastered}/46. Không có gợi ý. "
+                    "Đúng càng nhanh, damage càng lớn.",
                 ],
             )
             result = self.runner.run_question(
@@ -264,11 +293,11 @@ class LearnSession:
                 return
             if result.correct:
                 if result.rt_ms < 2000:
-                    damage = 15
+                    damage = BOSS_DAMAGE_FAST + stats.damage_bonus
                 elif result.rt_ms <= 5000:
-                    damage = 10
+                    damage = BOSS_DAMAGE_MEDIUM + stats.damage_bonus
                 else:
-                    damage = 6
+                    damage = BOSS_DAMAGE_SLOW + stats.damage_bonus
                 boss_hp = max(0, boss_hp - damage)
                 self.ui.say(f"Boss mất {damage} HP.", style="bold green")
             else:

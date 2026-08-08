@@ -10,7 +10,8 @@ successive relearning.
   `shi/si`, `chi/ti`, `tsu/tu`, `fu/hu`, `wo/o`, `n/nn`
 - **5 trạng thái thẻ**: NEW → LEARNING → REVIEW → MASTERED (RELEARNING khi trả lời sai)
 - **Buổi học (Learn) 6 giai đoạn**: mã hoá → gợi nhớ lần đầu (thang gợi ý 4 bậc
-  `?`) → gợi nhớ lẫn nhau → nhầm lẫn (comparison) → Boss Round (HP theo tốc độ)
+  `?`) → gợi nhớ lẫn nhau → nhầm lẫn (comparison) → Boss Round (HP/damage
+  scale theo level XP và số kana mastered, damage theo tốc độ)
 - **Review** (Quick/Full) theo nhóm 60/20/10/10 (đến hạn / yếu / nhầm / vững),
   kèm câu hỏi ngược (romaji → kana), chuỗi kana, từ ngắn, so sánh kana dễ nhầm
 - **Word Bridge**: mở khoá từ khi đã học hết các kana trong từ
@@ -41,7 +42,9 @@ pip install -r requirements.txt
 ## Chạy game
 
 ```powershell
-python main.py                # hoặc: python -m kana_rush
+.\run.bat         # Windows (tự dùng .venv nếu có)
+./run.sh          # Ubuntu (nhớ chmod +x run.sh trước)
+python main.py    # hoặc: python -m kana_rush
 ```
 
 Nếu là Python venv trên Ubuntu, dùng `python` từ venv (đã activate) hoặc
@@ -62,9 +65,15 @@ Nếu là Python venv trên Ubuntu, dùng `python` từ venv (đã activate) ho�
 ### Lưu tiến trình trên nhiều máy
 
 File tiến trình nằm trong `saves/progress.json` (kèm bản backup
-`progress.backup.json`) và được đưa vào git — mỗi lần chơi xong chọn
-**Lưu và thoát** (hoặc Ctrl+C) rồi commit/push, máy khác pull là chơi tiếp
-ngay.
+`progress.backup.json`) và được đồng bộ tự động qua git: mỗi lần mở game
+fetch + so sánh `updated_at` (bản mới hơn thắng, không bao giờ merge conflict),
+mỗi lần thoát (Lưu và thoát hoặc Ctrl+C) commit + push lên `origin/main`.
+
+- Điều kiện: máy phải cài `git`, repo đã cấu hình remote `origin` và
+  credential để push được.
+- Đồng bộ là best-effort: lỗi/chậm chỉ hiện cảnh báo vàng, game vẫn chơi
+  bình thường, tiến độ vẫn an toàn cục bộ.
+- Tắt đồng bộ: `KANA_RUSH_NO_CLOUD=1` (Windows: `set KANA_RUSH_NO_CLOUD=1`).
 
 ## Kiểm thử
 
@@ -81,8 +90,9 @@ hồi, các phiên học và nhiều kịch bản smoke cấp App + CLI.
 ```
 data/                 # hiragana.json, mnemonics_vi.json, confusion_pairs.json, words.json
 kana_rush/            # mã nguồn (UI tách biệt hoàn toàn khỏi logic SRS)
-tests/                # 13 file test
+tests/                # 15 file test
 main.py               # điểm vào dòng lệnh
+run.bat / run.sh      # launcher mở game nhanh
 saves/                # tiến trình người chơi (đồng bộ qua git)
 ```
 

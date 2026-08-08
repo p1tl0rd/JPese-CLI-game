@@ -27,9 +27,20 @@ class SmartUI(UI):
         self.question_count = 0
         self.hint_every = hint_every
         self.quit_after = quit_after
+        self.comparison_romaji = None
 
     def show_kana(self, kana: str, sub: str = "") -> None:
         self.last_shown = kana
+
+    def say(self, text: str = "", style: str | None = None) -> None:
+        # Câu so sánh "Kana nào đọc là 'X'? (1 hoặc 2)" - nhớ X để trả lời
+        # phần corrective typing ("Gõ lại romaji đúng") sau khi trả lời sai.
+        # (Không dùng re.search: crash access violation trên Python 3.14.)
+        if isinstance(text, str) and "đọc là" in text:
+            start = text.find("'", text.find("đọc là")) + 1
+            end = text.find("'", start)
+            if start > 0 and end > start:
+                self.comparison_romaji = text[start:end]
 
     def press_enter(self, message: str = "Nhấn Enter để tiếp tục") -> None:
         return None
@@ -40,6 +51,8 @@ class SmartUI(UI):
     def read_answer(self, prompt: str = "Romaji > ") -> Answer:
         if prompt.startswith("Chọn 1"):
             return Answer(kind="answer", text="1")
+        if "Gõ lại romaji đúng" in prompt:
+            return Answer(kind="answer", text=self.comparison_romaji or self._expected())
         if "Gõ lại" in prompt:
             return Answer(kind="answer", text=self._expected())
         if prompt.startswith(("Romaji", "Kana", "Chuỗi", "Từ này")):
@@ -231,3 +244,37 @@ def test_smoke_cli_subprocess_ascii_seed() -> None:
     )
     assert result.returncode == 0, result.stdout + result.stderr
     assert "SMOKE TEST: OK" in result.stdout
+
+
+def test_smoke_menu_counts_learning_not_mastered(tmp_path, dataset) -> None:
+    """Bug: 'Đang học' chỉ đếm LEARNING, sau lesson toàn REVIEW nên luôn 0."""
+    from kana_rush.timeutil import local_date_str
+
+    class CaptureUI(SmartUI):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.lines = []
+
+        def say(self, text: str = "", style: str | None = None) -> None:
+            self.lines.append(str(text))
+
+    storage = Storage(tmp_path)
+    save_with_review_cards(storage, dataset, count=3)
+    ui = CaptureUI(dataset, UIOptions(delay_ms=0, scripted_input=["0"]))
+    App(ui, dataset, storage, seed=1).run()
+    assert any("Đang học: 3" in line for line in ui.lines)
+
+
+def test_smoke_legacy_save_day_streak_starts_at_one(tmp_path, dataset) -> None:
+    """Bug: save cũ thiếu day_streak, last_active_date = hôm nay -> phải thành 1,
+    không được dùng save.streak (answer streak) làm chuỗi ngày."""
+    from kana_rush.timeutil import local_date_str
+
+    storage = Storage(tmp_path)
+    save = SaveData(session_count=1, xp=50, streak=21, best_streak=21)
+    save.last_active_date = local_date_str()
+    storage.save(save)
+    run_app(dataset, storage, ["0"])
+    loaded = storage.load()
+    assert loaded.day_streak == 1
+    assert loaded.streak == 21

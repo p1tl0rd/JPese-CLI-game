@@ -13,6 +13,7 @@ from conftest import NOW
 def test_round_trip_preserves_fields(tmp_path) -> None:
     storage = Storage(tmp_path)
     save = SaveData(session_id="s1", session_count=3, xp=1200, streak=5, best_streak=9)
+    save.day_streak = 4
     save.last_active_date = "2026-08-08"
     card = save.card("あ")
     card.state = KanaState.REVIEW
@@ -31,6 +32,7 @@ def test_round_trip_preserves_fields(tmp_path) -> None:
     assert loaded.xp == 1200
     assert loaded.streak == 5
     assert loaded.best_streak == 9
+    assert loaded.day_streak == 4
     assert loaded.last_active_date == "2026-08-08"
     card2 = loaded.card("あ")
     assert card2.state is KanaState.REVIEW
@@ -86,6 +88,7 @@ def test_migration_loads_legacy_save_with_missing_keys(tmp_path) -> None:
     del raw["schema_version"]
     del raw["best_speedrun_score"]
     del raw["achievements"]
+    del raw["day_streak"]
     with open(storage.progress_path(), "w", encoding="utf-8") as fh:
         json.dump(raw, fh)
     loaded = storage.load()
@@ -93,3 +96,4 @@ def test_migration_loads_legacy_save_with_missing_keys(tmp_path) -> None:
     assert loaded.schema_version == 1
     assert loaded.best_speedrun_score == 0
     assert loaded.achievements == []
+    assert loaded.day_streak == 0

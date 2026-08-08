@@ -6,3 +6,4 @@ build/
 *.egg-info/
 .venv/
 venv/
+.kana-rush-cloud-state.json

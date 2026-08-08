@@ -105,6 +105,7 @@ def save_to_dict(save: SaveData) -> dict:
         "xp": save.xp,
         "streak": save.streak,
         "best_streak": save.best_streak,
+        "day_streak": save.day_streak,
         "last_active_date": save.last_active_date,
         "cards": {kana: card_to_dict(card) for kana, card in save.cards.items()},
         "confusion_matrix": save.confusion_matrix,
@@ -131,6 +132,7 @@ def save_from_dict(data: dict) -> SaveData:
     save.xp = int(data.get("xp", 0))
     save.streak = int(data.get("streak", 0))
     save.best_streak = int(data.get("best_streak", 0))
+    save.day_streak = int(data.get("day_streak", 0))
     save.last_active_date = data.get("last_active_date")
     save.cards = {str(k): card_from_dict(v) for k, v in data.get("cards", {}).items()}
     save.confusion_matrix = {

@@ -5,7 +5,16 @@ from __future__ import annotations
 import datetime
 import random
 import secrets
+import threading
 
+from kana_rush.cloud import (
+    PUSH_QUIT_TIMEOUT_S,
+    PUSH_RETRY_ATTEMPTS,
+    PUSH_RETRY_TIMEOUT_S,
+    retry_pending_push,
+    sync_pull,
+    sync_push,
+)
 from kana_rush.data import KanaDataset
 from kana_rush.game import ConfusionDrill, DailySession, Diagnostic, SpeedRun
 from kana_rush.learn import LearnSession
@@ -75,12 +84,13 @@ class App:
             datetime.date.today() - datetime.timedelta(days=1)
         ).isoformat()
         if self.save.last_active_date == today:
-            pass
+            # Save cũ chưa có day_streak (migration): coi hôm nay là ngày 1
+            if self.save.day_streak < 1:
+                self.save.day_streak = 1
         elif self.save.last_active_date == yesterday:
-            self.save.streak += 1
+            self.save.day_streak += 1
         else:
-            self.save.streak = 1
-        self.save.best_streak = max(self.save.best_streak, self.save.streak)
+            self.save.day_streak = 1
         self.save.last_active_date = today
 
     def save_now(self) -> None:
@@ -95,6 +105,50 @@ class App:
         except Exception as exc:  # noqa: BLE001 - không được bỏ qua lỗi save
             self.ui.say(f"[bold red]LƯU LỖI: {exc}[/bold red]")
             self.ui.say("Tiến độ chưa được ghi an toàn. Hãy kiểm tra thư mục saves/.")
+
+    def _sync_now(self, *, push: bool) -> None:
+        try:
+            if push:
+                # Thoát game: giới hạn thời gian ngắn, phần nợ sẽ tự đẩy lại ở mở sau.
+                warning = sync_push(self.storage.save_dir, timeout=PUSH_QUIT_TIMEOUT_S)
+            else:
+                warning = sync_pull(self.storage.save_dir)
+        except Exception as exc:  # noqa: BLE001 - cloud không bao giờ chặn game
+            warning = f"Cloud: lỗi bất ngờ ({exc})."
+        if warning:
+            self.ui.say(f"[bold yellow]{warning}[/bold yellow]")
+
+    def _pull_worker(self, pending: dict[str, object]) -> None:
+        """Chạy nền: kéo save từ git + đẩy lại commit nợ; không chặn việc mở game."""
+        try:
+            warning = sync_pull(self.storage.save_dir)
+            retry_warning = retry_pending_push(
+                self.storage.save_dir,
+                timeout=PUSH_RETRY_TIMEOUT_S,
+                attempts=PUSH_RETRY_ATTEMPTS,
+            )
+            if retry_warning:
+                warning = f"{warning}\n{retry_warning}" if warning else retry_warning
+            pending["warning"] = warning
+        except Exception as exc:  # noqa: BLE001
+            pending["warning"] = f"Cloud: lỗi bất ngờ ({exc})."
+        finally:
+            pending["done"] = True
+
+    def _apply_pull_if_ready(self, pending: dict[str, object]) -> None:
+        """Áp dụng kết quả pull khi người chơi đang ở menu (an toàn để nạp lại save)."""
+        if pending.get("applied") or not pending.get("done"):
+            return
+        pending["applied"] = True
+        warning = pending.get("warning")
+        if not warning:
+            return
+        self.ui.say(f"[bold yellow]{warning}[/bold yellow]")
+        if warning.startswith("Đã đồng bộ") or warning.startswith("Đã tải"):
+            try:
+                self.save = self.storage.load()
+            except Exception as exc:  # noqa: BLE001
+                self.ui.say(f"[bold red]Lỗi khi nạp save sau đồng bộ: {exc}[/bold red]")
 
     def _now(self) -> datetime.datetime:
         return utcnow()
@@ -130,7 +184,7 @@ class App:
         if count is None:
             count = adaptive_new_count(self.save)
         count = min(count, len(new_ids), 7)
-        self.rng.shuffle(new_ids)
+        # Học theo thứ tự bảng chữ cái (a i u e o, ka ki ku...); Review mới random.
         session = LearnSession(
             self.ui,
             self.dataset,
@@ -233,7 +287,7 @@ class App:
         lines += [
             f"Recall đúng không hint: {stats.total_unaided_corrects(self.save)}",
             f"Lần dùng gợi ý: {stats.total_hints_used(self.save)}",
-            f"Chuỗi ngày học: {self.save.streak} | Tổng thời gian: {minutes} phút | Số session: {self.save.session_count}",
+            f"Chuỗi ngày học: {self.save.day_streak} | Tổng thời gian: {minutes} phút | Số session: {self.save.session_count}",
             f"XP: {self.save.xp} (Level {level_for_xp(self.save.xp)})",
         ]
         achievements = [
@@ -288,6 +342,10 @@ class App:
 
     # ------------------------------------------------------------ run
     def run(self) -> None:
+        pending: dict[str, object] = {}
+        threading.Thread(
+            target=self._pull_worker, args=(pending,), daemon=True, name="cloud-pull"
+        ).start()
         self._load_save()
         if not self.save:
             return
@@ -301,11 +359,13 @@ class App:
 
         while True:
             now = self._now()
+            self._apply_pull_if_ready(pending)
             choice = self.ui.main_menu(self.save, now)
             try:
                 if choice in (None, "0"):
                     self.save_now()
                     self.ui.say("Đã lưu. Hẹn gặp lại!", style="green")
+                    self._sync_now(push=True)
                     return
                 elif choice == "1":
                     DailySession(
@@ -352,6 +412,7 @@ class App:
             except KeyboardInterrupt:
                 self.save_now()
                 self.ui.say("\nĐã lưu (Ctrl+C). Hẹn gặp lại!", style="green")
+                self._sync_now(push=True)
                 return
 
     def _first_run(self) -> None:

@@ -16,6 +16,7 @@ from kana_rush.scheduler import (
     compose_review_pool,
     confusion_count,
 )
+from kana_rush.scoring import score_answer
 from kana_rush.session import QuestionRunner
 from kana_rush.timeutil import monotonic
 from kana_rush.ui import UI
@@ -86,11 +87,15 @@ class ReviewSession:
 
     def _comparison_partner(self, kana_id: str) -> str | None:
         card = self.save.card(kana_id)
-        candidates = [k for k in card.confused_with if self.save.card(k).state is not KanaState.NEW]
+        candidates = [
+            k
+            for k in card.confused_with
+            if k != kana_id and self.save.card(k).state is not KanaState.NEW
+        ]
         if not candidates:
             for row in self.save.confusion_matrix.values():
                 if kana_id in row:
-                    candidates.extend([k for k, v in row.items() if v > 0])
+                    candidates.extend([k for k, v in row.items() if v > 0 and k != kana_id])
         candidates = list(dict.fromkeys(candidates))
         if not candidates:
             return None
@@ -99,7 +104,7 @@ class ReviewSession:
 
     def _ask_comparison(self, kana_id: str) -> str | None:
         partner = self._comparison_partner(kana_id)
-        if partner is None:
+        if partner is None or partner == kana_id:
             return self._ask_kana(kana_id)
         if self.rng.random() < 0.5:
             kana_a, kana_b = kana_id, partner
@@ -181,9 +186,16 @@ class ReviewSession:
             correct = answer.text in expected_forms
             hinted = False
         if correct:
-            self.ui.feedback_correct(5, self.save.streak)
-            self.save.xp += 5
+            xp = 0
+            for _ in chain:
+                kana_xp, _ = score_answer(True, rt_ms, hinted, self.save.streak)
+                xp += kana_xp
+            self.save.xp += xp
+            self.save.streak += 1
+            self.save.best_streak = max(self.save.best_streak, self.save.streak)
+            self.ui.feedback_correct(xp, self.save.streak)
         else:
+            self.save.streak = 0
             self.ui.feedback_wrong(
                 correct_kana=" ".join(chain),
                 correct_romaji=" ".join(romajis),

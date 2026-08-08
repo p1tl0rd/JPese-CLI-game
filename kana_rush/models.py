@@ -172,8 +172,9 @@ class SaveData:
     session_count: int = 0
     total_study_seconds: float = 0.0
     xp: int = 0
-    streak: int = 0
+    streak: int = 0  # chuỗi câu trả lời đúng liên tiếp
     best_streak: int = 0
+    day_streak: int = 0  # chuỗi ngày học liên tiếp (tách riêng khỏi answer streak)
     last_active_date: str | None = None  # "YYYY-MM-DD" giờ địa phương
     cards: dict[str, KanaCard] = field(default_factory=dict)
     confusion_matrix: dict[str, dict[str, int]] = field(default_factory=dict)
