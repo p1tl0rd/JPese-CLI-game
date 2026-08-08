@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kana-rush"
+version = "1.0.0"
+description = "Kana Rush - game terminal học Hiragana bằng active recall va spaced repetition"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["rich>=13.0"]
+
+[project.scripts]
+kana-rush = "kana_rush.cli:main"
+
+[tool.setuptools]
+packages = ["kana_rush"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+kana_rush = ["../data/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
