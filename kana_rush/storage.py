@@ -11,6 +11,7 @@ from kana_rush.models import (
     AnswerSource,
     KanaCard,
     KanaState,
+    LessonProgress,
     SCHEMA_VERSION,
     SaveData,
 )
@@ -94,6 +95,33 @@ def card_to_dict(card: KanaCard) -> dict:
     }
 
 
+def lesson_progress_to_dict(progress: LessonProgress) -> dict:
+    return {
+        "lesson_id": progress.lesson_id,
+        "introduced_kana": list(progress.introduced_kana),
+        "completed_subgroups": [int(i) for i in progress.completed_subgroups],
+        "learn_completed": progress.learn_completed,
+        "started_at": progress.started_at.isoformat() if progress.started_at else None,
+        "completed_at": progress.completed_at.isoformat() if progress.completed_at else None,
+        "last_practiced_at": progress.last_practiced_at.isoformat() if progress.last_practiced_at else None,
+        "total_attempts": progress.total_attempts,
+        "accuracy": round(progress.accuracy, 4),
+    }
+
+
+def lesson_progress_from_dict(data: dict) -> LessonProgress:
+    progress = LessonProgress(lesson_id=int(data.get("lesson_id", 0)))
+    progress.introduced_kana = list(data.get("introduced_kana", []))
+    progress.completed_subgroups = [int(i) for i in data.get("completed_subgroups", [])]
+    progress.learn_completed = bool(data.get("learn_completed", False))
+    progress.started_at = parse_iso(data["started_at"]) if data.get("started_at") else None
+    progress.completed_at = parse_iso(data["completed_at"]) if data.get("completed_at") else None
+    progress.last_practiced_at = parse_iso(data["last_practiced_at"]) if data.get("last_practiced_at") else None
+    progress.total_attempts = int(data.get("total_attempts", 0))
+    progress.accuracy = float(data.get("accuracy", 0.0))
+    return progress
+
+
 def save_to_dict(save: SaveData) -> dict:
     return {
         "schema_version": SCHEMA_VERSION,
@@ -110,6 +138,10 @@ def save_to_dict(save: SaveData) -> dict:
         "cards": {kana: card_to_dict(card) for kana, card in save.cards.items()},
         "confusion_matrix": save.confusion_matrix,
         "word_progress": save.word_progress,
+        "lesson_progress": {
+            str(k): lesson_progress_to_dict(v)
+            for k, v in save.lesson_progress.items()
+        },
         "settings": save.settings,
         "achievements": save.achievements,
         "best_speedrun_score": save.best_speedrun_score,
@@ -140,6 +172,10 @@ def save_from_dict(data: dict) -> SaveData:
         for k, v in data.get("confusion_matrix", {}).items()
     }
     save.word_progress = data.get("word_progress", {})
+    save.lesson_progress = {
+        int(k): lesson_progress_from_dict(v)
+        for k, v in data.get("lesson_progress", {}).items()
+    }
     save.settings = data.get("settings", {})
     save.achievements = list(data.get("achievements", []))
     save.best_speedrun_score = int(data.get("best_speedrun_score", 0))

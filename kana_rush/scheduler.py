@@ -178,6 +178,20 @@ class Scheduler:
                 correct=correct,
             )
 
+        if source is AnswerSource.RANDOM:
+            # Random Review: kết quả vẫn vào lịch sử/thống kê, nhưng chỉ
+            # cập nhật lịch SRS khi kana thực sự đến hạn (tránh cày random
+            # đẩy lịch review đi quá xa).
+            due_now = card.next_review_at is not None and card.next_review_at <= now
+            if not due_now:
+                return Outcome(
+                    state_before=state_before,
+                    state_after=state_before,
+                    review_stage=card.review_stage,
+                    next_review_at=card.next_review_at or now,
+                    correct=correct,
+                )
+
         state_after, stage, next_review = self._transition(
             save, card, correct=correct, hinted=hinted, rt_ms=rt_ms, now=now
         )

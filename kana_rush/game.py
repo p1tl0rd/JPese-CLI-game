@@ -350,11 +350,17 @@ class DailySession:
         else:
             self.ui.say("Không có kana đến hạn. Tuyệt vời!", style="dim")
 
-        # 2) Learn kana mới nếu còn và chưa học quá target hôm nay.
-        new_ids = [k for k in self.dataset.by_kana if self.save.card(k).state is KanaState.NEW]
-        if new_ids:
-            from kana_rush.scheduler import adaptive_new_count
+        # 2) Learn kana mới theo lesson (chưa xong Learn, còn kana chưa vào REVIEW).
+        from kana_rush.lessons import load_lessons, next_lesson_to_learn
+        from kana_rush.scheduler import adaptive_new_count
 
+        lesson = next_lesson_to_learn(self.save, load_lessons())
+        if lesson is None:
+            self.ui.say(
+                "Đã học xong các lesson. Vào Review hoặc Speed Run để duy trì.",
+                style="dim",
+            )
+        else:
             target = int(self.save.settings.get("daily_learn_target", adaptive_new_count(self.save)))
             introduced_today = sum(
                 1
@@ -367,10 +373,9 @@ class DailySession:
                     style="dim",
                 )
             else:
-                count = min(target - introduced_today, len(new_ids), 7)
                 learn_session = LearnSession(
                     self.ui, self.dataset, self.save, self.scheduler, self.rng,
-                    self.now, self.session_id, new_ids[:count],
+                    self.now, self.session_id, lesson,
                 )
                 report = learn_session.run()
                 total_xp += report.xp_gained

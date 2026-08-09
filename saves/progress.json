@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "created_at": "2026-08-08T03:50:13.485968+00:00",
-  "updated_at": "2026-08-08T08:17:07.771359+00:00",
-  "session_id": "20260808080345-0309cf",
-  "session_count": 6,
-  "total_study_seconds": 4516.984,
-  "xp": 4686,
-  "streak": 38,
-  "best_streak": 50,
-  "day_streak": 1,
-  "last_active_date": "2026-08-08",
+  "updated_at": "2026-08-09T15:34:55.328090+00:00",
+  "session_id": "20260809152311-1cbc85",
+  "session_count": 9,
+  "total_study_seconds": 9283.12,
+  "xp": 13530,
+  "streak": 7,
+  "best_streak": 83,
+  "day_streak": 2,
+  "last_active_date": "2026-08-09",
   "cards": {
     "に": {
       "state": "new",
@@ -78,16 +78,16 @@
       "difficulty": 0.65
     },
     "そ": {
-      "state": "review",
+      "state": "relearning",
       "learning_step": 3,
-      "review_stage": 3,
-      "next_review_at": "2026-08-11T06:46:44.927351+00:00",
-      "last_reviewed_at": "2026-08-08T06:46:44.927351+00:00",
+      "review_stage": 1,
+      "next_review_at": "2026-08-08T15:26:14.286102+00:00",
+      "last_reviewed_at": "2026-08-08T15:26:14.286102+00:00",
       "introduced_at": "2026-08-08T04:01:12.783297+00:00",
       "correct_unaided": 6,
       "correct_with_hint": 0,
-      "wrong_count": 1,
-      "lapse_count": 0,
+      "wrong_count": 2,
+      "lapse_count": 1,
       "session_ids_correct": [
         "20260808035013-006a99",
         "20260808043112-3c8b73",
@@ -156,6 +156,15 @@
           "rt_ms": 3629,
           "confusion": null,
           "source": "review"
+        },
+        {
+          "ts": "2026-08-08T15:26:14.286102+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": false,
+          "hinted": true,
+          "rt_ms": 5200,
+          "confusion": "す",
+          "source": "review"
         }
       ],
       "response_times_ms": [
@@ -165,14 +174,16 @@
         2692,
         1350,
         2132,
-        3629
+        3629,
+        5200
       ],
       "confused_with": {
-        "お": 1
+        "お": 1,
+        "す": 1
       },
-      "mastery_score": 0.5419,
-      "stability": 1.65,
-      "difficulty": 0.47
+      "mastery_score": 0.4411,
+      "stability": 0.5775,
+      "difficulty": 0.62
     },
     "み": {
       "state": "new",
@@ -208,17 +219,19 @@
       "difficulty": 0.65
     },
     "す": {
-      "state": "new",
-      "learning_step": 0,
+      "state": "review",
+      "learning_step": 3,
       "review_stage": 0,
-      "next_review_at": null,
-      "last_reviewed_at": "2026-08-08T03:50:22.471729+00:00",
-      "introduced_at": null,
-      "correct_unaided": 0,
+      "next_review_at": "2026-08-08T15:23:47.060148+00:00",
+      "last_reviewed_at": "2026-08-08T15:23:47.060148+00:00",
+      "introduced_at": "2026-08-08T15:23:47.060148+00:00",
+      "correct_unaided": 7,
       "correct_with_hint": 0,
-      "wrong_count": 1,
+      "wrong_count": 3,
       "lapse_count": 0,
-      "session_ids_correct": [],
+      "session_ids_correct": [
+        "20260808152203-62739c"
+      ],
       "recent_results": [
         {
           "ts": "2026-08-08T03:50:22.471729+00:00",
@@ -228,89 +241,128 @@
           "rt_ms": 2927,
           "confusion": "い",
           "source": "diagnostic"
+        },
+        {
+          "ts": "2026-08-08T15:23:47.060148+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2638,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-08T15:23:47.060148+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2173,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-08T15:23:47.060148+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 14590,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-08T15:23:47.060148+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": false,
+          "hinted": true,
+          "rt_ms": 2277,
+          "confusion": "さ",
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-08T15:23:47.060148+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": false,
+          "hinted": true,
+          "rt_ms": 5005,
+          "confusion": "さ",
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-08T15:23:47.060148+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 5854,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-08T15:23:47.060148+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2526,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-08T15:23:47.060148+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 4429,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-08T15:23:47.060148+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1588,
+          "confusion": null,
+          "source": "lesson"
         }
       ],
       "response_times_ms": [
-        2927
+        2927,
+        2638,
+        2173,
+        14590,
+        2277,
+        5005,
+        5854,
+        2526,
+        4429,
+        1588
       ],
       "confused_with": {
-        "い": 1
+        "い": 1,
+        "さ": 2
       },
-      "mastery_score": 0.0,
-      "stability": 0.35,
-      "difficulty": 0.65
+      "mastery_score": 0.4567,
+      "stability": 1.0164,
+      "difficulty": 0.74
     },
     "あ": {
-      "state": "review",
+      "state": "mastered",
       "learning_step": 3,
-      "review_stage": 3,
-      "next_review_at": "2026-08-11T08:04:47.372923+00:00",
-      "last_reviewed_at": "2026-08-08T08:04:47.372923+00:00",
+      "review_stage": 6,
+      "next_review_at": "2026-09-08T14:20:00.304982+00:00",
+      "last_reviewed_at": "2026-08-09T14:20:00.304982+00:00",
       "introduced_at": "2026-08-08T06:43:19.336264+00:00",
-      "correct_unaided": 12,
-      "correct_with_hint": 5,
+      "correct_unaided": 29,
+      "correct_with_hint": 7,
       "wrong_count": 0,
       "lapse_count": 0,
       "session_ids_correct": [
         "20260808035013-006a99",
         "20260808064306-b2df59",
-        "20260808080345-0309cf"
+        "20260808080345-0309cf",
+        "20260808152203-62739c",
+        "20260809140238-0769c2"
       ],
       "recent_results": [
-        {
-          "ts": "2026-08-08T03:50:22.471729+00:00",
-          "session_id": "20260808035013-006a99",
-          "correct": true,
-          "hinted": false,
-          "rt_ms": 4510,
-          "confusion": null,
-          "source": "diagnostic"
-        },
-        {
-          "ts": "2026-08-08T06:43:19.336264+00:00",
-          "session_id": "20260808064306-b2df59",
-          "correct": true,
-          "hinted": false,
-          "rt_ms": 1772,
-          "confusion": null,
-          "source": "lesson"
-        },
-        {
-          "ts": "2026-08-08T06:43:19.336264+00:00",
-          "session_id": "20260808064306-b2df59",
-          "correct": true,
-          "hinted": false,
-          "rt_ms": 1078,
-          "confusion": null,
-          "source": "lesson"
-        },
-        {
-          "ts": "2026-08-08T06:43:19.336264+00:00",
-          "session_id": "20260808064306-b2df59",
-          "correct": true,
-          "hinted": false,
-          "rt_ms": 1309,
-          "confusion": null,
-          "source": "lesson"
-        },
-        {
-          "ts": "2026-08-08T06:43:19.336264+00:00",
-          "session_id": "20260808064306-b2df59",
-          "correct": true,
-          "hinted": false,
-          "rt_ms": 957,
-          "confusion": null,
-          "source": "lesson"
-        },
-        {
-          "ts": "2026-08-08T06:43:19.336264+00:00",
-          "session_id": "20260808064306-b2df59",
-          "correct": true,
-          "hinted": false,
-          "rt_ms": 932,
-          "confusion": null,
-          "source": "lesson"
-        },
         {
           "ts": "2026-08-08T06:43:19.336264+00:00",
           "session_id": "20260808064306-b2df59",
@@ -409,6 +461,177 @@
           "rt_ms": 1246,
           "confusion": null,
           "source": "lesson"
+        },
+        {
+          "ts": "2026-08-08T15:26:14.286102+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": true,
+          "hinted": true,
+          "rt_ms": 4006,
+          "confusion": null,
+          "source": "confusion"
+        },
+        {
+          "ts": "2026-08-08T15:26:14.286102+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 5741,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-08T15:26:14.286102+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": true,
+          "hinted": true,
+          "rt_ms": 10326,
+          "confusion": null,
+          "source": "confusion"
+        },
+        {
+          "ts": "2026-08-09T14:15:08.583038+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 4502,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:15:37.321392+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1958,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:15:37.321392+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1342,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:15:37.321392+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1910,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:15:37.321392+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1630,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:18:18.037237+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2711,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1887,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1462,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1270,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1166,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1270,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1406,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 965,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 774,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 759,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 838,
+          "confusion": null,
+          "source": "review"
         }
       ],
       "response_times_ms": [
@@ -428,26 +651,47 @@
         800,
         6740,
         3358,
-        1246
+        1246,
+        4006,
+        5741,
+        10326,
+        4502,
+        1958,
+        1342,
+        1910,
+        1630,
+        2711,
+        1887,
+        1462,
+        1270,
+        1166,
+        1270,
+        1406,
+        965,
+        774,
+        759,
+        838
       ],
       "confused_with": {},
-      "mastery_score": 0.877,
-      "stability": 4.55,
+      "mastery_score": 0.895,
+      "stability": 9.45,
       "difficulty": 0.05
     },
     "こ": {
-      "state": "review",
+      "state": "mastered",
       "learning_step": 3,
-      "review_stage": 0,
-      "next_review_at": "2026-08-08T08:04:47.372923+00:00",
-      "last_reviewed_at": "2026-08-08T08:04:47.372923+00:00",
+      "review_stage": 6,
+      "next_review_at": "2026-09-08T15:31:06.984569+00:00",
+      "last_reviewed_at": "2026-08-09T15:31:06.984569+00:00",
       "introduced_at": "2026-08-08T08:04:47.372923+00:00",
-      "correct_unaided": 7,
+      "correct_unaided": 23,
       "correct_with_hint": 2,
-      "wrong_count": 1,
-      "lapse_count": 0,
+      "wrong_count": 2,
+      "lapse_count": 1,
       "session_ids_correct": [
-        "20260808080345-0309cf"
+        "20260808080345-0309cf",
+        "20260809140238-0769c2",
+        "20260809152311-1cbc85"
       ],
       "recent_results": [
         {
@@ -539,6 +783,159 @@
           "rt_ms": 1259,
           "confusion": null,
           "source": "lesson"
+        },
+        {
+          "ts": "2026-08-08T15:26:14.286102+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": false,
+          "hinted": false,
+          "rt_ms": 2718,
+          "confusion": "さ",
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:11:37.190771+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 24695,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-09T14:11:37.190771+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 4182,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-09T15:29:25.307607+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 3583,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:29:25.307607+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1399,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:29:25.307607+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1598,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:29:25.307607+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1607,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2150,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1653,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 5758,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 6879,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1382,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 3823,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1550,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1205,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1382,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1118,
+          "confusion": null,
+          "source": "review"
         }
       ],
       "response_times_ms": [
@@ -551,14 +948,32 @@
         96466,
         3015,
         1189,
-        1259
+        1259,
+        2718,
+        24695,
+        4182,
+        3583,
+        1399,
+        1598,
+        1607,
+        2150,
+        1653,
+        5758,
+        6879,
+        1382,
+        3823,
+        1550,
+        1205,
+        1382,
+        1118
       ],
       "confused_with": {
-        "え": 1
+        "え": 1,
+        "さ": 1
       },
-      "mastery_score": 0.622,
-      "stability": 2.25,
-      "difficulty": 0.38
+      "mastery_score": 0.8405,
+      "stability": 4.8875,
+      "difficulty": 0.05
     },
     "め": {
       "state": "new",
@@ -941,18 +1356,20 @@
       "difficulty": 0.65
     },
     "く": {
-      "state": "review",
+      "state": "mastered",
       "learning_step": 3,
-      "review_stage": 0,
-      "next_review_at": "2026-08-08T08:04:47.372923+00:00",
-      "last_reviewed_at": "2026-08-08T08:04:47.372923+00:00",
+      "review_stage": 6,
+      "next_review_at": "2026-09-08T15:31:06.984569+00:00",
+      "last_reviewed_at": "2026-08-09T15:31:06.984569+00:00",
       "introduced_at": "2026-08-08T08:04:47.372923+00:00",
-      "correct_unaided": 3,
+      "correct_unaided": 19,
       "correct_with_hint": 1,
-      "wrong_count": 1,
-      "lapse_count": 0,
+      "wrong_count": 2,
+      "lapse_count": 1,
       "session_ids_correct": [
-        "20260808080345-0309cf"
+        "20260808080345-0309cf",
+        "20260809140238-0769c2",
+        "20260809152311-1cbc85"
       ],
       "recent_results": [
         {
@@ -999,6 +1416,159 @@
           "rt_ms": 800,
           "confusion": null,
           "source": "confusion"
+        },
+        {
+          "ts": "2026-08-09T14:11:37.190771+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": false,
+          "hinted": true,
+          "rt_ms": 1918,
+          "confusion": "き",
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-09T14:11:37.190771+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1542,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-09T14:11:37.190771+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1374,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-09T15:29:25.307607+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2438,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:29:25.307607+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2239,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:29:25.307607+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1911,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:29:25.307607+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1655,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1830,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1447,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1318,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1414,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1238,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1406,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2094,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1590,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1341,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1086,
+          "confusion": null,
+          "source": "review"
         }
       ],
       "response_times_ms": [
@@ -1006,14 +1576,32 @@
         1717,
         1356,
         2147,
-        800
+        800,
+        1918,
+        1542,
+        1374,
+        2438,
+        2239,
+        1911,
+        1655,
+        1830,
+        1447,
+        1318,
+        1414,
+        1238,
+        1406,
+        2094,
+        1590,
+        1341,
+        1086
       ],
       "confused_with": {
-        "あ": 1
+        "あ": 1,
+        "き": 1
       },
-      "mastery_score": 0.405,
-      "stability": 1.2,
-      "difficulty": 0.53
+      "mastery_score": 0.8268,
+      "stability": 4.92,
+      "difficulty": 0.2
     },
     "て": {
       "state": "new",
@@ -1047,18 +1635,20 @@
       "difficulty": 0.6
     },
     "う": {
-      "state": "review",
+      "state": "mastered",
       "learning_step": 3,
-      "review_stage": 0,
-      "next_review_at": "2026-08-08T06:43:19.336264+00:00",
-      "last_reviewed_at": "2026-08-08T06:43:19.336264+00:00",
+      "review_stage": 6,
+      "next_review_at": "2026-09-08T14:20:00.304982+00:00",
+      "last_reviewed_at": "2026-08-09T14:20:00.304982+00:00",
       "introduced_at": "2026-08-08T06:43:19.336264+00:00",
-      "correct_unaided": 8,
+      "correct_unaided": 26,
       "correct_with_hint": 1,
-      "wrong_count": 1,
-      "lapse_count": 0,
+      "wrong_count": 2,
+      "lapse_count": 1,
       "session_ids_correct": [
-        "20260808064306-b2df59"
+        "20260808064306-b2df59",
+        "20260808152203-62739c",
+        "20260809140238-0769c2"
       ],
       "recent_results": [
         {
@@ -1150,6 +1740,177 @@
           "rt_ms": 1299,
           "confusion": null,
           "source": "lesson"
+        },
+        {
+          "ts": "2026-08-08T15:23:47.060148+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": false,
+          "hinted": true,
+          "rt_ms": 8286,
+          "confusion": "さ",
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-08T15:23:47.060148+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 3438,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-08T15:23:47.060148+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2189,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-09T14:15:08.583038+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 3550,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:15:37.321392+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 3663,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:15:37.321392+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 3151,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:15:37.321392+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 5494,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:15:37.321392+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 5151,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:18:18.037237+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2685,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2310,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1438,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1213,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2022,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 3742,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2687,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2949,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1477,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2014,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 998,
+          "confusion": null,
+          "source": "review"
         }
       ],
       "response_times_ms": [
@@ -1162,14 +1923,34 @@
         1766,
         800,
         1491,
-        1299
+        1299,
+        8286,
+        3438,
+        2189,
+        3550,
+        3663,
+        3151,
+        5494,
+        5151,
+        2685,
+        2310,
+        1438,
+        1213,
+        2022,
+        3742,
+        2687,
+        2949,
+        1477,
+        2014,
+        998
       ],
       "confused_with": {
-        "あ": 1
+        "あ": 1,
+        "さ": 1
       },
-      "mastery_score": 0.666,
-      "stability": 2.6,
-      "difficulty": 0.38
+      "mastery_score": 0.8414,
+      "stability": 4.91,
+      "difficulty": 0.05
     },
     "ゆ": {
       "state": "new",
@@ -1471,17 +2252,19 @@
       "difficulty": 0.5
     },
     "し": {
-      "state": "new",
-      "learning_step": 0,
+      "state": "review",
+      "learning_step": 3,
       "review_stage": 0,
-      "next_review_at": null,
-      "last_reviewed_at": "2026-08-08T03:50:22.471729+00:00",
-      "introduced_at": null,
-      "correct_unaided": 0,
+      "next_review_at": "2026-08-08T15:23:47.060148+00:00",
+      "last_reviewed_at": "2026-08-08T15:23:47.060148+00:00",
+      "introduced_at": "2026-08-08T15:23:47.060148+00:00",
+      "correct_unaided": 3,
       "correct_with_hint": 0,
       "wrong_count": 1,
       "lapse_count": 0,
-      "session_ids_correct": [],
+      "session_ids_correct": [
+        "20260808152203-62739c"
+      ],
       "recent_results": [
         {
           "ts": "2026-08-08T03:50:22.471729+00:00",
@@ -1491,17 +2274,47 @@
           "rt_ms": 1558,
           "confusion": "い",
           "source": "diagnostic"
+        },
+        {
+          "ts": "2026-08-08T15:23:47.060148+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2894,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-08T15:23:47.060148+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1422,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-08T15:23:47.060148+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2445,
+          "confusion": null,
+          "source": "lesson"
         }
       ],
       "response_times_ms": [
-        1558
+        1558,
+        2894,
+        1422,
+        2445
       ],
       "confused_with": {
         "い": 1
       },
-      "mastery_score": 0.0,
-      "stability": 0.35,
-      "difficulty": 0.65
+      "mastery_score": 0.376,
+      "stability": 1.05,
+      "difficulty": 0.56
     },
     "よ": {
       "state": "new",
@@ -1573,17 +2386,19 @@
       "state": "review",
       "learning_step": 3,
       "review_stage": 0,
-      "next_review_at": "2026-08-08T06:46:44.927351+00:00",
-      "last_reviewed_at": "2026-08-08T06:46:44.927351+00:00",
+      "next_review_at": "2026-08-09T15:31:06.984569+00:00",
+      "last_reviewed_at": "2026-08-09T15:31:06.984569+00:00",
       "introduced_at": "2026-08-08T03:52:40.338129+00:00",
-      "correct_unaided": 7,
+      "correct_unaided": 21,
       "correct_with_hint": 0,
-      "wrong_count": 1,
-      "lapse_count": 0,
+      "wrong_count": 5,
+      "lapse_count": 3,
       "session_ids_correct": [
         "20260808035013-006a99",
         "20260808043112-3c8b73",
-        "20260808064306-b2df59"
+        "20260808064306-b2df59",
+        "20260809140238-0769c2",
+        "20260809152311-1cbc85"
       ],
       "recent_results": [
         {
@@ -1657,6 +2472,168 @@
           "rt_ms": 6213,
           "confusion": null,
           "source": "review"
+        },
+        {
+          "ts": "2026-08-08T15:26:14.286102+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": false,
+          "hinted": false,
+          "rt_ms": 5574,
+          "confusion": "さ",
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:11:37.190771+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": false,
+          "hinted": true,
+          "rt_ms": 2686,
+          "confusion": "か",
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-09T14:11:37.190771+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2174,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-09T14:11:37.190771+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2190,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-09T15:29:25.307607+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 6567,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:29:25.307607+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 4445,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:29:25.307607+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 20607,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:29:25.307607+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": false,
+          "hinted": false,
+          "rt_ms": 11237,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 32369,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1783,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2590,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1942,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1663,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1855,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2111,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 4278,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": false,
+          "hinted": false,
+          "rt_ms": 1599,
+          "confusion": "け",
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1559,
+          "confusion": null,
+          "source": "review"
         }
       ],
       "response_times_ms": [
@@ -1667,14 +2644,35 @@
         5574,
         212357,
         7581,
-        6213
+        6213,
+        5574,
+        2686,
+        2174,
+        2190,
+        6567,
+        4445,
+        20607,
+        11237,
+        32369,
+        1783,
+        2590,
+        1942,
+        1663,
+        1855,
+        2111,
+        4278,
+        1599,
+        1559
       ],
       "confused_with": {
-        "も": 1
+        "も": 1,
+        "さ": 1,
+        "か": 1,
+        "け": 1
       },
-      "mastery_score": 0.586,
-      "stability": 1.75,
-      "difficulty": 0.44
+      "mastery_score": 0.5015,
+      "stability": 1.2125,
+      "difficulty": 0.57
     },
     "ぬ": {
       "state": "new",
@@ -1776,16 +2774,16 @@
       "difficulty": 0.65
     },
     "た": {
-      "state": "review",
+      "state": "relearning",
       "learning_step": 3,
       "review_stage": 0,
-      "next_review_at": "2026-08-08T08:04:47.372923+00:00",
-      "last_reviewed_at": "2026-08-08T08:04:47.372923+00:00",
+      "next_review_at": "2026-08-08T15:26:14.286102+00:00",
+      "last_reviewed_at": "2026-08-08T15:26:14.286102+00:00",
       "introduced_at": "2026-08-08T04:01:12.783297+00:00",
       "correct_unaided": 4,
       "correct_with_hint": 1,
-      "wrong_count": 2,
-      "lapse_count": 1,
+      "wrong_count": 3,
+      "lapse_count": 2,
       "session_ids_correct": [
         "20260808035013-006a99",
         "20260808043112-3c8b73"
@@ -1853,6 +2851,15 @@
           "rt_ms": 800,
           "confusion": null,
           "source": "confusion"
+        },
+        {
+          "ts": "2026-08-08T15:26:14.286102+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": false,
+          "hinted": false,
+          "rt_ms": 11190,
+          "confusion": null,
+          "source": "review"
         }
       ],
       "response_times_ms": [
@@ -1862,15 +2869,16 @@
         958,
         7429,
         3529,
-        800
+        800,
+        11190
       ],
       "confused_with": {
         "こ": 1,
         "て": 1
       },
-      "mastery_score": 0.313,
-      "stability": 0.5575,
-      "difficulty": 0.65
+      "mastery_score": 0.2561,
+      "stability": 0.2787,
+      "difficulty": 0.75
     },
     "や": {
       "state": "new",
@@ -1908,16 +2916,18 @@
     "か": {
       "state": "review",
       "learning_step": 3,
-      "review_stage": 0,
-      "next_review_at": "2026-08-08T06:44:47.535175+00:00",
-      "last_reviewed_at": "2026-08-08T06:44:47.535175+00:00",
+      "review_stage": 6,
+      "next_review_at": "2026-09-08T15:31:06.984569+00:00",
+      "last_reviewed_at": "2026-08-09T15:31:06.984569+00:00",
       "introduced_at": "2026-08-08T06:44:47.535175+00:00",
-      "correct_unaided": 5,
+      "correct_unaided": 22,
       "correct_with_hint": 0,
-      "wrong_count": 1,
-      "lapse_count": 0,
+      "wrong_count": 3,
+      "lapse_count": 2,
       "session_ids_correct": [
-        "20260808064306-b2df59"
+        "20260808064306-b2df59",
+        "20260809140238-0769c2",
+        "20260809152311-1cbc85"
       ],
       "recent_results": [
         {
@@ -1973,6 +2983,177 @@
           "rt_ms": 4834,
           "confusion": null,
           "source": "lesson"
+        },
+        {
+          "ts": "2026-08-08T15:26:14.286102+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": false,
+          "hinted": false,
+          "rt_ms": 11190,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:11:37.190771+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 3022,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-09T14:11:37.190771+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": false,
+          "hinted": true,
+          "rt_ms": 1781,
+          "confusion": "き",
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-09T14:11:37.190771+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 3518,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-09T14:11:37.190771+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2902,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-09T15:29:25.307607+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2173,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:29:25.307607+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1350,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:29:25.307607+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1310,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:29:25.307607+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1557,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1174,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2399,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1542,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1966,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1358,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1390,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 983,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 31351,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1518,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2141,
+          "confusion": null,
+          "source": "review"
         }
       ],
       "response_times_ms": [
@@ -1981,27 +3162,49 @@
         8029,
         2442,
         4155,
-        4834
+        4834,
+        11190,
+        3022,
+        1781,
+        3518,
+        2902,
+        2173,
+        1350,
+        1310,
+        1557,
+        1174,
+        2399,
+        1542,
+        1966,
+        1358,
+        1390,
+        983,
+        31351,
+        1518,
+        2141
       ],
       "confused_with": {
-        "よ": 1
+        "よ": 1,
+        "き": 1
       },
-      "mastery_score": 0.4873,
-      "stability": 1.35,
-      "difficulty": 0.5
+      "mastery_score": 0.7563,
+      "stability": 4.5063,
+      "difficulty": 0.24
     },
     "さ": {
-      "state": "new",
-      "learning_step": 0,
+      "state": "review",
+      "learning_step": 3,
       "review_stage": 0,
-      "next_review_at": null,
-      "last_reviewed_at": "2026-08-08T03:50:22.471729+00:00",
-      "introduced_at": null,
-      "correct_unaided": 0,
-      "correct_with_hint": 0,
+      "next_review_at": "2026-08-08T15:23:47.060148+00:00",
+      "last_reviewed_at": "2026-08-08T15:23:47.060148+00:00",
+      "introduced_at": "2026-08-08T15:23:47.060148+00:00",
+      "correct_unaided": 5,
+      "correct_with_hint": 1,
       "wrong_count": 1,
       "lapse_count": 0,
-      "session_ids_correct": [],
+      "session_ids_correct": [
+        "20260808152203-62739c"
+      ],
       "recent_results": [
         {
           "ts": "2026-08-08T03:50:22.471729+00:00",
@@ -2011,17 +3214,77 @@
           "rt_ms": 1574,
           "confusion": "え",
           "source": "diagnostic"
+        },
+        {
+          "ts": "2026-08-08T15:23:47.060148+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 7966,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-08T15:23:47.060148+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1646,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-08T15:23:47.060148+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2343,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-08T15:23:47.060148+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": true,
+          "hinted": true,
+          "rt_ms": 800,
+          "confusion": null,
+          "source": "confusion"
+        },
+        {
+          "ts": "2026-08-08T15:23:47.060148+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 3606,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-08T15:23:47.060148+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2061,
+          "confusion": null,
+          "source": "lesson"
         }
       ],
       "response_times_ms": [
-        1574
+        1574,
+        7966,
+        1646,
+        2343,
+        800,
+        3606,
+        2061
       ],
       "confused_with": {
         "え": 1
       },
-      "mastery_score": 0.0,
-      "stability": 0.35,
-      "difficulty": 0.65
+      "mastery_score": 0.5059,
+      "stability": 1.5,
+      "difficulty": 0.47
     },
     "ひ": {
       "state": "new",
@@ -2059,16 +3322,18 @@
     "け": {
       "state": "review",
       "learning_step": 3,
-      "review_stage": 0,
-      "next_review_at": "2026-08-08T08:04:47.372923+00:00",
-      "last_reviewed_at": "2026-08-08T08:04:47.372923+00:00",
+      "review_stage": 6,
+      "next_review_at": "2026-09-08T15:31:06.984569+00:00",
+      "last_reviewed_at": "2026-08-09T15:31:06.984569+00:00",
       "introduced_at": "2026-08-08T08:04:47.372923+00:00",
-      "correct_unaided": 6,
+      "correct_unaided": 19,
       "correct_with_hint": 0,
-      "wrong_count": 1,
-      "lapse_count": 0,
+      "wrong_count": 7,
+      "lapse_count": 5,
       "session_ids_correct": [
-        "20260808080345-0309cf"
+        "20260808080345-0309cf",
+        "20260809140238-0769c2",
+        "20260809152311-1cbc85"
       ],
       "recent_results": [
         {
@@ -2133,6 +3398,177 @@
           "rt_ms": 1062,
           "confusion": null,
           "source": "lesson"
+        },
+        {
+          "ts": "2026-08-08T15:26:14.286102+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": false,
+          "hinted": false,
+          "rt_ms": 4966,
+          "confusion": "う",
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:11:37.190771+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": false,
+          "hinted": true,
+          "rt_ms": 3542,
+          "confusion": "く",
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-09T14:11:37.190771+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1710,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-09T14:11:37.190771+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 4566,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-09T15:29:25.307607+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": false,
+          "hinted": false,
+          "rt_ms": 2831,
+          "confusion": "く",
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:29:25.307607+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 3357,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:29:25.307607+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": false,
+          "hinted": false,
+          "rt_ms": 7976,
+          "confusion": "く",
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:29:25.307607+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 4214,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": false,
+          "hinted": false,
+          "rt_ms": 2895,
+          "confusion": "く",
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2558,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2615,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": false,
+          "hinted": false,
+          "rt_ms": 3534,
+          "confusion": "く",
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2471,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1758,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1551,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 11584,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1510,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1869,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T15:31:06.984569+00:00",
+          "session_id": "20260809152311-1cbc85",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 3191,
+          "confusion": null,
+          "source": "review"
         }
       ],
       "response_times_ms": [
@@ -2142,26 +3578,49 @@
         17909,
         1309,
         2502,
-        1062
+        1062,
+        4966,
+        3542,
+        1710,
+        4566,
+        2831,
+        3357,
+        7976,
+        4214,
+        2895,
+        2558,
+        2615,
+        3534,
+        2471,
+        1758,
+        1551,
+        11584,
+        1510,
+        1869,
+        3191
       ],
-      "confused_with": {},
-      "mastery_score": 0.5569,
-      "stability": 1.9,
-      "difficulty": 0.42
+      "confused_with": {
+        "う": 1,
+        "く": 5
+      },
+      "mastery_score": 0.4154,
+      "stability": 1.9841,
+      "difficulty": 0.74
     },
     "お": {
       "state": "review",
       "learning_step": 3,
-      "review_stage": 0,
-      "next_review_at": "2026-08-08T06:44:47.535175+00:00",
-      "last_reviewed_at": "2026-08-08T06:44:47.535175+00:00",
+      "review_stage": 6,
+      "next_review_at": "2026-09-08T14:20:00.304982+00:00",
+      "last_reviewed_at": "2026-08-09T14:20:00.304982+00:00",
       "introduced_at": "2026-08-08T06:44:47.535175+00:00",
-      "correct_unaided": 5,
+      "correct_unaided": 20,
       "correct_with_hint": 2,
-      "wrong_count": 1,
-      "lapse_count": 0,
+      "wrong_count": 3,
+      "lapse_count": 1,
       "session_ids_correct": [
-        "20260808064306-b2df59"
+        "20260808064306-b2df59",
+        "20260809140238-0769c2"
       ],
       "recent_results": [
         {
@@ -2235,6 +3694,159 @@
           "rt_ms": 1821,
           "confusion": null,
           "source": "lesson"
+        },
+        {
+          "ts": "2026-08-08T15:26:14.286102+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": false,
+          "hinted": false,
+          "rt_ms": 10174,
+          "confusion": "さ",
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:15:08.583038+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": false,
+          "hinted": false,
+          "rt_ms": 3191,
+          "confusion": "あ",
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:15:37.321392+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 4759,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:15:37.321392+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1486,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:15:37.321392+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1541,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:15:37.321392+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1398,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:18:18.037237+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 80376,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1701,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1534,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1125,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1382,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1230,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 8053,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1502,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1286,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1094,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1237,
+          "confusion": null,
+          "source": "review"
         }
       ],
       "response_times_ms": [
@@ -2245,29 +3857,49 @@
         800,
         800,
         1866,
-        1821
+        1821,
+        10174,
+        3191,
+        4759,
+        1486,
+        1541,
+        1398,
+        80376,
+        1701,
+        1534,
+        1125,
+        1382,
+        1230,
+        8053,
+        1502,
+        1286,
+        1094,
+        1237
       ],
       "confused_with": {
-        "こ": 1
+        "こ": 1,
+        "さ": 1,
+        "あ": 1
       },
-      "mastery_score": 0.522,
-      "stability": 1.65,
-      "difficulty": 0.44
+      "mastery_score": 0.7971,
+      "stability": 4.4021,
+      "difficulty": 0.29
     },
     "い": {
-      "state": "review",
+      "state": "mastered",
       "learning_step": 3,
-      "review_stage": 0,
-      "next_review_at": "2026-08-08T06:46:44.927351+00:00",
-      "last_reviewed_at": "2026-08-08T06:46:44.927351+00:00",
+      "review_stage": 6,
+      "next_review_at": "2026-09-08T14:20:00.304982+00:00",
+      "last_reviewed_at": "2026-08-09T14:20:00.304982+00:00",
       "introduced_at": "2026-08-08T06:43:19.336264+00:00",
-      "correct_unaided": 5,
-      "correct_with_hint": 0,
+      "correct_unaided": 21,
+      "correct_with_hint": 2,
       "wrong_count": 0,
       "lapse_count": 0,
       "session_ids_correct": [
         "20260808035013-006a99",
-        "20260808064306-b2df59"
+        "20260808064306-b2df59",
+        "20260809140238-0769c2"
       ],
       "recent_results": [
         {
@@ -2314,6 +3946,168 @@
           "rt_ms": 5660,
           "confusion": null,
           "source": "review"
+        },
+        {
+          "ts": "2026-08-08T15:23:47.060148+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": true,
+          "hinted": true,
+          "rt_ms": 800,
+          "confusion": null,
+          "source": "confusion"
+        },
+        {
+          "ts": "2026-08-08T15:23:47.060148+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": true,
+          "hinted": true,
+          "rt_ms": 800,
+          "confusion": null,
+          "source": "confusion"
+        },
+        {
+          "ts": "2026-08-09T14:15:08.583038+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1677,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:15:37.321392+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1910,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:15:37.321392+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1222,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:15:37.321392+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1503,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:15:37.321392+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1463,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:18:18.037237+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1373,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1550,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1206,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1223,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1229,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1293,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1197,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1237,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1062,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2061,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1062,
+          "confusion": null,
+          "source": "review"
         }
       ],
       "response_times_ms": [
@@ -2321,12 +4115,30 @@
         2269,
         1701,
         863,
-        5660
+        5660,
+        800,
+        800,
+        1677,
+        1910,
+        1222,
+        1503,
+        1463,
+        1373,
+        1550,
+        1206,
+        1223,
+        1229,
+        1293,
+        1197,
+        1237,
+        1062,
+        2061,
+        1062
       ],
       "confused_with": {},
-      "mastery_score": 0.607,
-      "stability": 2.3,
-      "difficulty": 0.35
+      "mastery_score": 0.895,
+      "stability": 7.1,
+      "difficulty": 0.05
     },
     "り": {
       "state": "new",
@@ -2395,18 +4207,20 @@
       "difficulty": 0.65
     },
     "え": {
-      "state": "review",
+      "state": "mastered",
       "learning_step": 3,
-      "review_stage": 0,
-      "next_review_at": "2026-08-08T06:44:47.535175+00:00",
-      "last_reviewed_at": "2026-08-08T06:44:47.535175+00:00",
+      "review_stage": 6,
+      "next_review_at": "2026-09-08T14:20:00.304982+00:00",
+      "last_reviewed_at": "2026-08-09T14:20:00.304982+00:00",
       "introduced_at": "2026-08-08T06:44:47.535175+00:00",
-      "correct_unaided": 5,
-      "correct_with_hint": 0,
+      "correct_unaided": 22,
+      "correct_with_hint": 1,
       "wrong_count": 2,
       "lapse_count": 0,
       "session_ids_correct": [
-        "20260808064306-b2df59"
+        "20260808064306-b2df59",
+        "20260808152203-62739c",
+        "20260809140238-0769c2"
       ],
       "recent_results": [
         {
@@ -2471,6 +4285,168 @@
           "rt_ms": 2572,
           "confusion": null,
           "source": "lesson"
+        },
+        {
+          "ts": "2026-08-08T15:23:47.060148+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": true,
+          "hinted": true,
+          "rt_ms": 800,
+          "confusion": null,
+          "source": "confusion"
+        },
+        {
+          "ts": "2026-08-08T15:23:47.060148+00:00",
+          "session_id": "20260808152203-62739c",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1518,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-09T14:15:08.583038+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2310,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:15:37.321392+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1534,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:15:37.321392+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1423,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:15:37.321392+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 7151,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:15:37.321392+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2262,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:18:18.037237+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1621,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1190,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1390,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1157,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1950,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1790,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1350,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1159,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1494,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1654,
+          "confusion": null,
+          "source": "review"
+        },
+        {
+          "ts": "2026-08-09T14:20:00.304982+00:00",
+          "session_id": "20260809140238-0769c2",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1230,
+          "confusion": null,
+          "source": "review"
         }
       ],
       "response_times_ms": [
@@ -2480,14 +4456,32 @@
         1893,
         2392,
         1705,
-        2572
+        2572,
+        800,
+        1518,
+        2310,
+        1534,
+        1423,
+        7151,
+        2262,
+        1621,
+        1190,
+        1390,
+        1157,
+        1950,
+        1790,
+        1350,
+        1159,
+        1494,
+        1654,
+        1230
       ],
       "confused_with": {
         "あ": 1
       },
-      "mastery_score": 0.4267,
-      "stability": 1.275,
-      "difficulty": 0.6
+      "mastery_score": 0.894,
+      "stability": 6.125,
+      "difficulty": 0.06
     },
     "る": {
       "state": "new",
@@ -2663,16 +4657,19 @@
       "ね": 1
     },
     "そ": {
-      "お": 1
+      "お": 1,
+      "す": 1
     },
     "み": {
       "あ": 1
     },
     "す": {
-      "い": 1
+      "い": 1,
+      "さ": 2
     },
     "こ": {
-      "え": 1
+      "え": 1,
+      "さ": 1
     },
     "め": {
       "る": 1
@@ -2699,10 +4696,12 @@
       "あ": 1
     },
     "く": {
-      "あ": 1
+      "あ": 1,
+      "き": 1
     },
     "う": {
-      "あ": 1
+      "あ": 1,
+      "さ": 1
     },
     "ゆ": {
       "あ": 1
@@ -2727,7 +4726,10 @@
       "て": 1
     },
     "き": {
-      "も": 1
+      "も": 1,
+      "さ": 1,
+      "か": 1,
+      "け": 1
     },
     "ぬ": {
       "こ": 1
@@ -2746,7 +4748,8 @@
       "る": 1
     },
     "か": {
-      "よ": 1
+      "よ": 1,
+      "き": 1
     },
     "さ": {
       "え": 1
@@ -2755,7 +4758,9 @@
       "う": 1
     },
     "お": {
-      "こ": 1
+      "こ": 1,
+      "さ": 1,
+      "あ": 1
     },
     "り": {
       "み": 1
@@ -2780,6 +4785,10 @@
     },
     "せ": {
       "あ": 1
+    },
+    "け": {
+      "う": 1,
+      "く": 5
     }
   },
   "word_progress": {
@@ -2883,6 +4892,12 @@
         "session_id": "20260808064306-b2df59",
         "correct": true,
         "rt_ms": 2813
+      },
+      {
+        "ts": "2026-08-08T15:30:20.585654+00:00",
+        "session_id": "20260808152203-62739c",
+        "correct": false,
+        "rt_ms": 12479
       }
     ],
     "うた": [
@@ -2897,6 +4912,18 @@
         "session_id": "20260808064306-b2df59",
         "correct": true,
         "rt_ms": 5918
+      },
+      {
+        "ts": "2026-08-08T15:27:17.336384+00:00",
+        "session_id": "20260808152203-62739c",
+        "correct": false,
+        "rt_ms": 7631
+      },
+      {
+        "ts": "2026-08-08T15:31:34.842262+00:00",
+        "session_id": "20260808152203-62739c",
+        "correct": true,
+        "rt_ms": 51767
       }
     ],
     "いえ": [
@@ -2935,6 +4962,18 @@
         "session_id": "20260808064306-b2df59",
         "correct": true,
         "rt_ms": 2118
+      },
+      {
+        "ts": "2026-08-08T15:28:05.175862+00:00",
+        "session_id": "20260808152203-62739c",
+        "correct": true,
+        "rt_ms": 7095
+      },
+      {
+        "ts": "2026-08-08T15:28:16.015984+00:00",
+        "session_id": "20260808152203-62739c",
+        "correct": true,
+        "rt_ms": 2894
       }
     ],
     "うえ": [
@@ -2967,8 +5006,174 @@
         "session_id": "20260808064306-b2df59",
         "correct": true,
         "rt_ms": 4446
+      },
+      {
+        "ts": "2026-08-08T15:31:55.746458+00:00",
+        "session_id": "20260808152203-62739c",
+        "correct": true,
+        "rt_ms": 4822
+      }
+    ],
+    "ここ": [
+      {
+        "ts": "2026-08-08T15:26:52.583309+00:00",
+        "session_id": "20260808152203-62739c",
+        "correct": false,
+        "rt_ms": 5630
+      },
+      {
+        "ts": "2026-08-08T15:27:57.479651+00:00",
+        "session_id": "20260808152203-62739c",
+        "correct": false,
+        "rt_ms": 8854
+      },
+      {
+        "ts": "2026-08-08T15:29:52.720972+00:00",
+        "session_id": "20260808152203-62739c",
+        "correct": true,
+        "rt_ms": 12599
+      }
+    ],
+    "いし": [
+      {
+        "ts": "2026-08-08T15:28:12.520692+00:00",
+        "session_id": "20260808152203-62739c",
+        "correct": true,
+        "rt_ms": 6743
+      },
+      {
+        "ts": "2026-08-08T15:29:37.657145+00:00",
+        "session_id": "20260808152203-62739c",
+        "correct": true,
+        "rt_ms": 2423
+      }
+    ],
+    "かく": [
+      {
+        "ts": "2026-08-08T15:28:28.559957+00:00",
+        "session_id": "20260808152203-62739c",
+        "correct": true,
+        "rt_ms": 6935
+      },
+      {
+        "ts": "2026-08-08T15:29:12.328946+00:00",
+        "session_id": "20260808152203-62739c",
+        "correct": false,
+        "rt_ms": 10487
+      },
+      {
+        "ts": "2026-08-08T15:32:43.611569+00:00",
+        "session_id": "20260808152203-62739c",
+        "correct": false,
+        "rt_ms": 17854
+      }
+    ],
+    "さけ": [
+      {
+        "ts": "2026-08-08T15:29:01.239612+00:00",
+        "session_id": "20260808152203-62739c",
+        "correct": true,
+        "rt_ms": 26942
+      },
+      {
+        "ts": "2026-08-08T15:33:14.306493+00:00",
+        "session_id": "20260808152203-62739c",
+        "correct": true,
+        "rt_ms": 26246
+      }
+    ],
+    "ねこ": [
+      {
+        "ts": "2026-08-08T15:29:22.809585+00:00",
+        "session_id": "20260808152203-62739c",
+        "correct": false,
+        "rt_ms": 9878
+      },
+      {
+        "ts": "2026-08-08T15:32:25.155444+00:00",
+        "session_id": "20260808152203-62739c",
+        "correct": false,
+        "rt_ms": 28806
+      }
+    ],
+    "すし": [
+      {
+        "ts": "2026-08-08T15:29:34.632198+00:00",
+        "session_id": "20260808152203-62739c",
+        "correct": true,
+        "rt_ms": 6477
+      }
+    ],
+    "すき": [
+      {
+        "ts": "2026-08-08T15:30:07.504628+00:00",
+        "session_id": "20260808152203-62739c",
+        "correct": true,
+        "rt_ms": 12367
+      }
+    ],
+    "そこ": [
+      {
+        "ts": "2026-08-08T15:30:34.769219+00:00",
+        "session_id": "20260808152203-62739c",
+        "correct": false,
+        "rt_ms": 13582
+      },
+      {
+        "ts": "2026-08-08T15:31:43.899034+00:00",
+        "session_id": "20260808152203-62739c",
+        "correct": false,
+        "rt_ms": 8455
+      }
+    ],
+    "こえ": [
+      {
+        "ts": "2026-08-08T15:30:42.473288+00:00",
+        "session_id": "20260808152203-62739c",
+        "correct": true,
+        "rt_ms": 7103
+      }
+    ],
+    "うし": [
+      {
+        "ts": "2026-08-08T15:31:50.322521+00:00",
+        "session_id": "20260808152203-62739c",
+        "correct": false,
+        "rt_ms": 5821
       }
     ]
+  },
+  "lesson_progress": {
+    "2": {
+      "lesson_id": 2,
+      "introduced_kana": [
+        "か",
+        "き",
+        "く",
+        "け",
+        "こ"
+      ],
+      "completed_subgroups": [
+        0
+      ],
+      "learn_completed": true,
+      "started_at": "2026-08-09T14:11:37.190771+00:00",
+      "completed_at": "2026-08-09T14:11:37.190771+00:00",
+      "last_practiced_at": "2026-08-09T15:31:06.984569+00:00",
+      "total_attempts": 86,
+      "accuracy": 0.9412
+    },
+    "1": {
+      "lesson_id": 1,
+      "introduced_kana": [],
+      "completed_subgroups": [],
+      "learn_completed": false,
+      "started_at": null,
+      "completed_at": null,
+      "last_practiced_at": "2026-08-09T14:20:00.304982+00:00",
+      "total_attempts": 80,
+      "accuracy": 1.0
+    }
   },
   "settings": {},
   "achievements": [

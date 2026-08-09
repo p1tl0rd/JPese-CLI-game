@@ -100,12 +100,13 @@ def save_with_review_cards(storage: Storage, dataset: KanaDataset, count: int = 
 
 def test_smoke_fresh_learn_with_hints(tmp_path, dataset) -> None:
     storage = Storage(tmp_path)
-    run_app(dataset, storage, ["1", "2", "0"], hint_every=6)
+    run_app(dataset, storage, ["1", "2", "1", "L", "0", "0", "0"], hint_every=6)
     save = storage.load()
     assert save.session_count >= 1
     assert save.xp > 0
     reviewed = [k for k, c in save.cards.items() if c.state is KanaState.REVIEW]
     assert len(reviewed) >= 4
+    assert set(reviewed) == {"あ", "い", "う", "え", "お"}
 
 
 def test_smoke_first_run_diagnostic(tmp_path, dataset) -> None:
@@ -129,14 +130,14 @@ def test_smoke_daily_session(tmp_path, dataset) -> None:
 def test_smoke_quick_review(tmp_path, dataset) -> None:
     storage = Storage(tmp_path)
     save_with_review_cards(storage, dataset, count=3)
-    run_app(dataset, storage, ["3", "1", "0"])
+    run_app(dataset, storage, ["3", "1", "0", "0"])
     loaded = storage.load()
     assert loaded.session_count == 3
 
 
 def test_smoke_quit_mid_learn(tmp_path, dataset) -> None:
     storage = Storage(tmp_path)
-    run_app(dataset, storage, ["1", "2", "0"], quit_after=1)
+    run_app(dataset, storage, ["1", "2", "0", "0"], quit_after=1)
     save = storage.load()
     assert save.session_count >= 1
     assert all(c.state is not KanaState.REVIEW for c in save.cards.values())
@@ -278,3 +279,123 @@ def test_smoke_legacy_save_day_streak_starts_at_one(tmp_path, dataset) -> None:
     loaded = storage.load()
     assert loaded.day_streak == 1
     assert loaded.streak == 21
+
+
+# ------------------------------------------------------------ lesson system smoke
+
+
+def advance_to_lesson(save: SaveData, dataset: KanaDataset, target_id: int) -> None:
+    """Đánh dấu các lesson trước target đã học xong Learn (kana ở REVIEW)."""
+    import datetime
+
+    from kana_rush.lessons import LessonDataset
+    from kana_rush.models import LessonProgress
+
+    lessons = LessonDataset(dataset=dataset)
+    scheduler = Scheduler(dataset)
+    now = datetime.datetime.now(datetime.timezone.utc)
+    for lesson in lessons.lessons:
+        if lesson.id >= target_id:
+            break
+        for k in lesson.kana:
+            scheduler.introduce(save, k, now=now)
+            scheduler.promote_to_review(save, k, stage=1, now=now - datetime.timedelta(days=1))
+        save.lesson_progress[lesson.id] = LessonProgress(
+            lesson_id=lesson.id,
+            introduced_kana=list(lesson.kana),
+            completed_subgroups=list(range(lesson.group_count)),
+            learn_completed=True,
+        )
+
+
+def test_smoke_lesson_select_locked_message(tmp_path, dataset) -> None:
+    """Chọn lesson chưa mở khóa chỉ hiện cảnh báo, không crash."""
+    storage = Storage(tmp_path)
+    run_app(dataset, storage, ["1", "2", "7", "0", "0", "0"])
+    loaded = storage.load()
+    assert loaded.session_count >= 1
+
+
+def test_smoke_learn_lesson7_subgroups(tmp_path, dataset) -> None:
+    """Học Lesson 7 qua menu: 2 subgroup + boss, tiến độ lưu đúng."""
+    from kana_rush.lessons import LessonDataset
+
+    storage = Storage(tmp_path)
+    save = SaveData(session_count=2)
+    advance_to_lesson(save, dataset, 7)
+    storage.save(save)
+    run_app(dataset, storage, ["2", "7", "L", "0", "0", "0"])
+    loaded = storage.load()
+    assert loaded.lesson_progress[7].learn_completed is True
+    assert loaded.lesson_progress[7].completed_subgroups == [0, 1]
+    lesson7 = LessonDataset(dataset=dataset).by_id[7]
+    assert all(loaded.card(k).state is KanaState.REVIEW for k in lesson7.kana)
+
+
+def test_smoke_review_single_lesson(tmp_path, dataset) -> None:
+    """Review đúng một lesson từ menu Review; tiến độ lesson được cập nhật."""
+    storage = Storage(tmp_path)
+    save_with_review_cards(storage, dataset, count=3)
+    run_app(dataset, storage, ["3", "2", "1", "2", "0", "0"])
+    loaded = storage.load()
+    assert loaded.session_count == 3
+    assert loaded.lesson_progress[1].total_attempts == 20
+    assert loaded.lesson_progress[1].last_practiced_at is not None
+
+
+def test_smoke_review_multi_lessons(tmp_path, dataset) -> None:
+    """Chọn nhiều lesson '1-2', xác nhận, chọn số câu, chạy review."""
+    import datetime
+
+    from kana_rush.lessons import LessonDataset
+    from kana_rush.models import LessonProgress
+
+    storage = Storage(tmp_path)
+    save = save_with_review_cards(storage, dataset, count=5)
+    save.lesson_progress[1] = LessonProgress(
+        lesson_id=1, introduced_kana=list("あいうえお"), completed_subgroups=[0],
+        learn_completed=True,
+    )
+    scheduler = Scheduler(dataset)
+    now = datetime.datetime.now(datetime.timezone.utc)
+    scheduler.introduce(save, "か", now=now)
+    scheduler.promote_to_review(save, "か", now=now)
+    scheduler.introduce(save, "き", now=now)
+    scheduler.promote_to_review(save, "き", now=now)
+    storage.save(save)
+    run_app(dataset, storage, ["3", "3", "1-2", "", "1", "0", "0"])
+    loaded = storage.load()
+    assert loaded.session_count == 3
+    assert loaded.lesson_progress[1].last_practiced_at is not None
+    assert loaded.lesson_progress[1].total_attempts >= 10
+
+
+def test_smoke_random_review(tmp_path, dataset) -> None:
+    """Random Review: chọn hướng + số câu; kết quả vẫn vào lịch sử/thống kê."""
+    storage = Storage(tmp_path)
+    save_with_review_cards(storage, dataset, count=3)
+    run_app(dataset, storage, ["3", "4", "1", "2", "0", "0"])
+    loaded = storage.load()
+    assert loaded.xp > 120
+    assert any(
+        r["source"] == "random"
+        for c in loaded.cards.values()
+        for r in c.recent_results
+    )
+
+
+def test_smoke_smart_random(tmp_path, dataset) -> None:
+    storage = Storage(tmp_path)
+    save_with_review_cards(storage, dataset, count=3)
+    run_app(dataset, storage, ["3", "5", "1", "0", "0"])
+    loaded = storage.load()
+    assert loaded.session_count == 3
+
+
+def test_smoke_review_all_unlocked(tmp_path, dataset) -> None:
+    storage = Storage(tmp_path)
+    save_with_review_cards(storage, dataset, count=3)
+    run_app(dataset, storage, ["3", "6", "4", "0", "0"])
+    loaded = storage.load()
+    assert loaded.session_count == 3
+    assert loaded.xp > 120

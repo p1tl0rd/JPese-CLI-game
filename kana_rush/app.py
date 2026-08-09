@@ -18,9 +18,28 @@ from kana_rush.cloud import (
 from kana_rush.data import KanaDataset
 from kana_rush.game import ConfusionDrill, DailySession, Diagnostic, SpeedRun
 from kana_rush.learn import LearnSession
+from kana_rush.lessons import (
+    Lesson,
+    LessonSelectionError,
+    LessonStatus,
+    check_lessons_reviewable,
+    learned_pool,
+    lesson_accuracy,
+    lesson_due_count,
+    lesson_mastered_count,
+    lesson_pool,
+    lesson_status,
+    lesson_unlocked,
+    load_lessons,
+    multi_lesson_pool,
+    parse_lesson_selection,
+    reviewable_lessons,
+    srs_lesson_breakdown,
+    srs_pool,
+)
 from kana_rush.models import KanaState, SaveData
 from kana_rush.review import ReviewSession
-from kana_rush.scheduler import Scheduler, adaptive_new_count
+from kana_rush.scheduler import Scheduler
 from kana_rush.scoring import ACHIEVEMENT_LABELS, check_achievements
 from kana_rush.storage import SaveCorrupted, Storage
 from kana_rush.timeutil import local_date_str, monotonic, utcnow
@@ -175,16 +194,392 @@ class App:
         session.run()
         self.save_now()
 
-    def _run_learn(self, count: int | None = None) -> None:
-        new_ids = [k for k in self.dataset.by_kana if self.save.card(k).state is KanaState.NEW]
-        if not new_ids:
-            self.ui.say("Đã học hết 46 kana! Vào Review hoặc Speed Run để duy trì.", style="dim")
+    # ------------------------------------------------------------ lesson flow
+    def _lesson_flow(self) -> None:
+        """Menu HỌC HIRAGANA: chọn lesson, xem trạng thái, L/R/S/B."""
+        lessons = load_lessons(self.dataset)
+        while True:
+            now = self._now()
+            statuses = [
+                lesson_status(self.save, lessons, lesson, now)
+                for lesson in lessons.lessons
+            ]
+            choice = self.ui.lesson_select_menu(lessons.lessons, statuses)
+            if choice in (None, "0", "", "b", "quit", "exit", "thoat"):
+                return
+            try:
+                lesson_id = int(choice)
+            except ValueError:
+                self.ui.say("Lựa chọn không hợp lệ.", style="dim")
+                continue
+            lesson = lessons.by_id.get(lesson_id)
+            if lesson is None:
+                self.ui.say(f"Lesson {lesson_id} không tồn tại.", style="dim")
+                continue
+            status = lesson_status(self.save, lessons, lesson, now)
+            if status is LessonStatus.LOCKED:
+                self.ui.say(
+                    "Lesson này chưa mở khóa: hãy hoàn thành lesson trước.",
+                    style="yellow",
+                )
+                self.ui.delay()
+                continue
+            started = any(
+                self.save.card(k).state is not KanaState.NEW for k in lesson.kana
+            )
+            while True:
+                now = self._now()
+                action = self.ui.lesson_detail_menu(
+                    lesson,
+                    lesson_status(self.save, lessons, lesson, now),
+                    lesson_mastered_count(self.save, lesson),
+                    lesson_due_count(self.save, lesson, now),
+                    lesson_accuracy(self.save, lesson),
+                    started,
+                )
+                if action in ("b", "0", None, ""):
+                    break
+                if action == "l":
+                    self._run_learn(lesson)
+                elif action == "r":
+                    if not started:
+                        self.ui.say("Lesson chưa bắt đầu: hãy học trước đã.", style="dim")
+                        continue
+                    self._run_single_lesson_review(lesson)
+                elif action == "s":
+                    self._lesson_stats(lesson)
+                else:
+                    self.ui.say("Lựa chọn không hợp lệ.", style="dim")
+
+    def _run_single_lesson_review(self, lesson: Lesson) -> None:
+        """Review đúng một lesson với menu chọn số câu."""
+        pool = lesson_pool(self.save, lesson)
+        if not pool:
+            self.ui.say("Lesson này chưa có kana nào để ôn.", style="dim")
             self.ui.delay()
             return
-        if count is None:
-            count = adaptive_new_count(self.save)
-        count = min(count, len(new_ids), 7)
-        # Học theo thứ tự bảng chữ cái (a i u e o, ka ki ku...); Review mới random.
+        choice = self.ui.review_size_menu("single")
+        settings: dict = {"pool": pool, "lesson_id": lesson.id}
+        if choice == "1":
+            settings["total"] = 10
+        elif choice == "2":
+            settings["total"] = 20
+        elif choice == "3":
+            settings["full"] = True
+        elif choice == "4":
+            settings["endless"] = True
+        else:
+            return
+        session = ReviewSession(
+            self.ui,
+            self.dataset,
+            self.save,
+            self.scheduler,
+            self.rng,
+            self._now(),
+            self.save.session_id,
+            "lesson",
+            settings,
+        )
+        session.run()
+        self.save_now()
+
+    def _lesson_stats(self, lesson: Lesson) -> None:
+        now = self._now()
+        progress = self.save.lesson_progress.get(lesson.id)
+        lines = [
+            f"Lesson {lesson.id} — {lesson.name_vi}",
+            f"Kana: {lesson.kana_label}",
+            "",
+        ]
+        for kana_id in lesson.kana:
+            card = self.save.card(kana_id)
+            acc = card.recent_accuracy(10)
+            acc_text = f"{acc:.0%}" if acc is not None else "-"
+            due_text = (
+                "CÓ"
+                if card.next_review_at is not None and card.next_review_at <= now
+                else "-"
+            )
+            lines.append(
+                f"{kana_id}  {card.state.value.upper():<10}  "
+                f"Accuracy: {acc_text:<5}  Đến hạn: {due_text}"
+            )
+        if progress is not None:
+            lines += [
+                "",
+                f"Đã học: {len(progress.introduced_kana)}/{len(lesson.kana)} kana",
+                f"Subgroup xong: {progress.completed_subgroups}",
+                f"Tổng lần luyện: {progress.total_attempts} | "
+                f"Accuracy: {progress.accuracy:.0%}",
+            ]
+        self.ui.show_summary("THỐNG KÊ LESSON", lines)
+        self.ui.press_enter()
+
+    # ------------------------------------------------------------ review flow
+    def _review_flow(self) -> None:
+        """Menu CHỌN KIỂU REVIEW: SRS / 1 lesson / nhiều lesson / random / smart / all."""
+        while True:
+            choice = self.ui.review_type_menu()
+            if choice in (None, "0"):
+                return
+            now = self._now()
+            if choice == "1":
+                self._review_srs(now)
+            elif choice == "2":
+                self._review_single_lesson()
+            elif choice == "3":
+                self._review_multi_lessons(now)
+            elif choice == "4":
+                self._review_random_pool(now, smart=False)
+            elif choice == "5":
+                self._review_random_pool(now, smart=True)
+            elif choice == "6":
+                self._review_all_unlocked(now)
+            elif choice == "7":
+                ConfusionDrill(
+                    self.ui, self.dataset, self.save, self.scheduler,
+                    self.rng, now, self.save.session_id,
+                ).run()
+                self.save_now()
+            else:
+                self.ui.say("Lựa chọn không hợp lệ.", style="dim")
+
+    def _review_srs(self, now) -> None:
+        """Ôn kana đến hạn – SRS Recommended (không phụ thuộc lesson)."""
+        lessons = load_lessons(self.dataset)
+        pool = srs_pool(self.save, now, self.rng)
+        if not pool:
+            self.ui.say(
+                "Không có kana đến hạn. Học mới hoặc ôn một lesson!", style="dim"
+            )
+            self.ui.delay()
+            return
+        lines = [f"{len(pool)} kana đang đến hạn"]
+        for lesson, count in srs_lesson_breakdown(self.save, lessons, pool):
+            if count:
+                lines.append(f"Lesson {lesson.id}: {count}")
+        minutes = max(1, round(len(pool) * 8 / 60))
+        lines.append(f"Thời gian dự kiến: {minutes} phút")
+        self.ui.show_summary("ÔN KANA ĐẾN HẠN (SRS)", lines)
+        session = ReviewSession(
+            self.ui,
+            self.dataset,
+            self.save,
+            self.scheduler,
+            self.rng,
+            now,
+            self.save.session_id,
+            "srs",
+            {"pool": pool},
+        )
+        session.run()
+        self.save_now()
+
+    def _review_single_lesson(self) -> None:
+        lessons = load_lessons(self.dataset)
+        eligible = reviewable_lessons(self.save, lessons)
+        if not eligible:
+            self.ui.say("Chưa có lesson nào để ôn: hãy bắt đầu học trước.", style="dim")
+            self.ui.delay()
+            return
+        choice = self.ui.single_lesson_menu(eligible)
+        if choice in (None, "0", ""):
+            return
+        try:
+            lesson_id = int(choice)
+        except ValueError:
+            self.ui.say("Lựa chọn không hợp lệ.", style="dim")
+            return
+        lesson = lessons.by_id.get(lesson_id)
+        if lesson is None or not any(
+            self.save.card(k).state is not KanaState.NEW for k in lesson.kana
+        ):
+            self.ui.say(f"Lesson {lesson_id} không thể ôn: chưa bắt đầu.", style="yellow")
+            return
+        self._run_single_lesson_review(lesson)
+
+    def _review_multi_lessons(self, now) -> None:
+        lessons = load_lessons(self.dataset)
+        while True:
+            raw = self.ui.read_menu_choice(
+                "Chọn các lesson (vd: 1,3,5 / 1-4 / 1,3-6 / all) > "
+            )
+            if raw in (None, "0", "quit", "exit", "thoat"):
+                return
+            try:
+                ids = parse_lesson_selection(raw)
+            except LessonSelectionError as exc:
+                self.ui.say(str(exc), style="yellow")
+                continue
+            try:
+                check_lessons_reviewable(self.save, lessons, ids)
+            except LessonSelectionError as exc:
+                self.ui.say(str(exc), style="yellow")
+                continue
+            pool = multi_lesson_pool(self.save, lessons, ids)
+            if not pool:
+                self.ui.say("Không có kana nào khả dụng từ các lesson đã chọn.", style="dim")
+                continue
+            lines = ["Bạn sẽ review:"]
+            for lesson_id in ids:
+                lesson = lessons.by_id[lesson_id]
+                lines.append(f"Lesson {lesson.id}: {' '.join(lesson_pool(self.save, lesson))}")
+            action = self.ui.confirm_multi_lessons(lines, len(pool))
+            if action == "c":
+                continue
+            if action == "q":
+                return
+            size_choice = self.ui.review_size_menu("multi")
+            settings: dict = {"pool": pool, "lesson_ids": ids}
+            if size_choice == "1":
+                settings["total"] = 10
+            elif size_choice == "2":
+                settings["total"] = 20
+            elif size_choice == "3":
+                settings["total"] = 30
+            elif size_choice == "4":
+                settings["full"] = True
+            elif size_choice == "5":
+                settings["double"] = True
+            elif size_choice == "6":
+                settings["endless"] = True
+            else:
+                return
+            session = ReviewSession(
+                self.ui,
+                self.dataset,
+                self.save,
+                self.scheduler,
+                self.rng,
+                now,
+                self.save.session_id,
+                "multi",
+                settings,
+            )
+            session.run()
+            self.save_now()
+            return
+
+    def _pool_lesson_range(self, lessons, pool: list[str]) -> str:
+        in_pool = set(pool)
+        ids = [l.id for l in lessons.lessons if any(k in in_pool for k in l.kana)]
+        if not ids:
+            return ""
+        if len(ids) == 1:
+            return f"Lesson {ids[0]}"
+        return f"Lesson {min(ids)}–{max(ids)}"
+
+    def _review_random_pool(self, now, smart: bool) -> None:
+        lessons = load_lessons(self.dataset)
+        pool = learned_pool(self.save, lessons)
+        if not pool:
+            self.ui.say(
+                "Chưa có kana nào để review: hãy học một lesson trước.", style="dim"
+            )
+            self.ui.delay()
+            return
+        reverse = bool(self.save.settings.get("reverse_mode", False))
+        if not smart:
+            direction = self.ui.direction_menu()
+            if direction in (None, "0"):
+                return
+            reverse = direction == "2"
+        size_choice = self.ui.review_size_menu("random")
+        settings: dict = {"pool": pool, "reverse": reverse}
+        if size_choice == "1":
+            settings["total"] = 10
+        elif size_choice == "2":
+            settings["total"] = 20
+        elif size_choice == "3":
+            settings["total"] = 30
+        elif size_choice == "4":
+            settings["endless"] = True
+        else:
+            return
+        mode = "smart" if smart else "random"
+        range_label = self._pool_lesson_range(lessons, pool)
+        self.ui.say(
+            f"[bold]{'SMART RANDOM' if smart else 'RANDOM REVIEW'}[/bold]"
+        )
+        self.ui.say(
+            f"[dim]Pool: {len(pool)} kana"
+            + (f" từ {range_label}" if range_label else "")
+            + f" | Số câu: {settings.get('total', 'Endless')}"
+            + (" | Direction: Romaji → Kana" if reverse else " | Direction: Kana → Romaji")
+            + "[/dim]"
+        )
+        session = ReviewSession(
+            self.ui,
+            self.dataset,
+            self.save,
+            self.scheduler,
+            self.rng,
+            now,
+            self.save.session_id,
+            mode,
+            settings,
+        )
+        session.run()
+        self.save_now()
+
+    def _review_all_unlocked(self, now) -> None:
+        lessons = load_lessons(self.dataset)
+        pool = learned_pool(self.save, lessons)
+        if not pool:
+            self.ui.say("Chưa có kana nào đã mở khóa để ôn.", style="dim")
+            self.ui.delay()
+            return
+        pool.sort(
+            key=lambda k: (
+                not (
+                    self.save.card(k).next_review_at is not None
+                    and self.save.card(k).next_review_at <= now
+                ),
+                self.save.card(k).next_review_at.isoformat()
+                if self.save.card(k).next_review_at
+                else "9999",
+                k,
+            )
+        )
+        size_choice = self.ui.review_size_menu("multi")
+        settings: dict = {"pool": pool}
+        if size_choice == "1":
+            settings["total"] = 10
+        elif size_choice == "2":
+            settings["total"] = 20
+        elif size_choice == "3":
+            settings["total"] = 30
+        elif size_choice == "4":
+            settings["full"] = True
+        elif size_choice == "5":
+            settings["double"] = True
+        elif size_choice == "6":
+            settings["endless"] = True
+        else:
+            return
+        session = ReviewSession(
+            self.ui,
+            self.dataset,
+            self.save,
+            self.scheduler,
+            self.rng,
+            now,
+            self.save.session_id,
+            "all",
+            settings,
+        )
+        session.run()
+        self.save_now()
+
+    def _run_learn(self, lesson: Lesson) -> None:
+        """Chạy Learn Mode cho một lesson (hỗ trợ subgroup 7/8)."""
+        lessons = load_lessons(self.dataset)
+        next_lesson = self._next_lesson_after(lessons, lesson)
+        next_was_locked = (
+            next_lesson is not None
+            and not lesson_unlocked(self.save, lessons, next_lesson.id)
+        )
         session = LearnSession(
             self.ui,
             self.dataset,
@@ -193,10 +588,28 @@ class App:
             self.rng,
             self._now(),
             self.save.session_id,
-            new_ids[:count],
+            lesson,
         )
-        session.run()
+        report = session.run()
         self.save_now()
+        if (
+            report.completed
+            and next_lesson is not None
+            and next_was_locked
+            and lesson_unlocked(self.save, lessons, next_lesson.id)
+        ):
+            self.ui.say(
+                f"[bold green]Đã mở khóa Lesson {next_lesson.id}: {next_lesson.kana_label}![/bold green]"
+            )
+
+    @staticmethod
+    def _next_lesson_after(lessons, lesson: Lesson) -> Lesson | None:
+        index = next(
+            (i for i, l in enumerate(lessons.lessons) if l.id == lesson.id), None
+        )
+        if index is None or index + 1 >= len(lessons.lessons):
+            return None
+        return lessons.lessons[index + 1]
 
     def _run_word_bridge(self, count: int = 5) -> None:
         try:
@@ -374,14 +787,9 @@ class App:
                     ).run()
                     self.save_now()
                 elif choice == "2":
-                    self._run_learn()
+                    self._lesson_flow()
                 elif choice == "3":
-                    mode = self.ui.select_mode(
-                        "REVIEW",
-                        [("1", "Quick Review (~10 câu)"), ("2", "Full Review (toàn bộ đến hạn)"), ("0", "Quay lại")],
-                    )
-                    if mode in ("1", "2"):
-                        self._run_review("quick" if mode == "1" else "full")
+                    self._review_flow()
                 elif choice == "4":
                     ConfusionDrill(
                         self.ui, self.dataset, self.save, self.scheduler,

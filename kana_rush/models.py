@@ -45,6 +45,7 @@ class AnswerSource(Enum):
     DIAGNOSTIC = "diagnostic"
     CONFUSION = "confusion"
     SPEEDRUN = "speedrun"
+    RANDOM = "random"
 
 
 class HintLevel(Enum):
@@ -164,6 +165,21 @@ class Outcome:
 
 
 @dataclass
+class LessonProgress:
+    """Tiến độ riêng của một lesson (trạng thái suy ra từ kana khi có thể)."""
+
+    lesson_id: int
+    introduced_kana: list[str] = field(default_factory=list)
+    completed_subgroups: list[int] = field(default_factory=list)
+    learn_completed: bool = False
+    started_at: datetime.datetime | None = None
+    completed_at: datetime.datetime | None = None
+    last_practiced_at: datetime.datetime | None = None
+    total_attempts: int = 0
+    accuracy: float = 0.0
+
+
+@dataclass
 class SaveData:
     schema_version: int = SCHEMA_VERSION
     created_at: datetime.datetime = field(default_factory=utcnow)
@@ -179,6 +195,7 @@ class SaveData:
     cards: dict[str, KanaCard] = field(default_factory=dict)
     confusion_matrix: dict[str, dict[str, int]] = field(default_factory=dict)
     word_progress: dict[str, list[dict]] = field(default_factory=dict)
+    lesson_progress: dict[int, LessonProgress] = field(default_factory=dict)
     settings: dict = field(default_factory=dict)
     achievements: list[str] = field(default_factory=list)
     best_speedrun_score: int = 0

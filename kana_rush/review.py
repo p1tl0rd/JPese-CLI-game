@@ -1,5 +1,9 @@
 """Review Mode: Quick/Full review với bucket 60/20/10/10, nhiều dạng câu hỏi,
-kana sai quay lại sau 2/5/near-end."""
+kana sai quay lại sau 2/5/near-end.
+
+Thêm các chế độ theo lesson: SRS Recommended, một lesson, nhiều lesson,
+Random, Smart Random, toàn bộ kana đã mở khóa (spec lesson system).
+"""
 
 from __future__ import annotations
 
@@ -8,6 +12,7 @@ import random
 from dataclasses import dataclass, field
 
 from kana_rush.data import KanaDataset
+from kana_rush.lessons import RoundRobinDeck, smart_pick
 from kana_rush.models import AnswerSource, KanaState, SaveData
 from kana_rush.scheduler import (
     QuestionPicker,
@@ -24,6 +29,11 @@ from kana_rush.words import NoWordsAvailable, available_words, record_word_resul
 
 QUICK_SIZE_DEFAULT = 10
 FULL_REVIEW_CAP = 50
+
+# Chế độ chạy theo bộ bài trộn vòng (lesson/multi/random/smart/all)
+DECK_MODES = ("lesson", "multi", "random", "smart", "all")
+# Chế độ practice: kết quả vào lịch sử nhưng chỉ cập nhật SRS khi kana đến hạn
+PRACTICE_MODES = ("random", "smart", "all")
 
 
 @dataclass
@@ -71,7 +81,35 @@ class ReviewSession:
 
     # ------------------------------------------------------------ helpers
     def _build_pool(self, size: int) -> list[str]:
-        return compose_review_pool(self.save, self.now, size, self.rng)
+        if self.mode == "quick":
+            return compose_review_pool(self.save, self.now, size, self.rng)
+        if self.mode == "full":
+            return compose_review_pool(
+                self.save,
+                self.now,
+                min(max(len(self.save.due_ids(self.now)), 5), FULL_REVIEW_CAP),
+                self.rng,
+            )
+        if self.mode == "srs":
+            return list(self.settings.get("pool") or [])
+        return []
+
+    def _deck_pool(self) -> list[str]:
+        """Pool cho chế độ deck: đã được App chuẩn bị sẵn trong settings['pool']."""
+        return list(self.settings.get("pool") or [])
+
+    def _deck_total(self, pool: list[str]) -> int | None:
+        """Số câu của chế độ deck; None = Endless."""
+        if self.settings.get("endless"):
+            return None
+        if self.settings.get("full"):
+            return len(pool)
+        if self.settings.get("double"):
+            return len(pool) * 2
+        total = int(self.settings.get("total", 0))
+        if total > 0:
+            return total
+        return len(pool)
 
     def _pick_question_type(self, kana_id: str) -> str:
         """Trả "kana" | "reverse" | "chain" | "comparison"."""
@@ -277,10 +315,18 @@ class ReviewSession:
 
     # ------------------------------------------------------------ run
     def run(self) -> ReviewReport:
+        if self.mode in DECK_MODES:
+            return self._run_deck()
+        return self._run_legacy()
+
+    def _run_legacy(self) -> ReviewReport:
         due = self.save.due_ids(self.now)
         if self.mode == "quick":
             size = int(self.settings.get("quick_review_size", QUICK_SIZE_DEFAULT))
             pool = self._build_pool(size)
+        elif self.mode == "srs":
+            pool = self._build_pool(0)
+            size = len(pool)
         else:
             size = min(max(len(due), 5), FULL_REVIEW_CAP)
             pool = self._build_pool(size)
@@ -363,3 +409,90 @@ class ReviewSession:
             ),
         )
         return self.report
+
+    # ------------------------------------------------------------ deck
+    def _run_deck(self) -> ReviewReport:
+        pool = self._deck_pool()
+        if not pool:
+            self.ui.say("Không có kana khả dụng cho chế độ này.", style="dim")
+            self.ui.delay()
+            return self.report
+        total = self._deck_total(pool)
+        reverse = bool(self.settings.get("reverse", False))
+        source = (
+            AnswerSource.RANDOM
+            if self.mode in PRACTICE_MODES
+            else AnswerSource.REVIEW
+        )
+
+        self.ui.say(
+            f"[bold]REVIEW {self.mode.upper()}[/bold] - Pool: {len(pool)} kana"
+            + (f", Số câu: {total}" if total is not None else ", Endless")
+        )
+        if reverse:
+            self.ui.say("[dim]Hướng: Romaji -> Kana[/dim]")
+
+        deck = RoundRobinDeck(pool, self.rng)
+        last_asked: str | None = None
+        while total is None or self.report.total < total:
+            if self.mode == "smart":
+                kana_id = smart_pick(pool, self.save, self.rng, self.now, last_asked)
+            else:
+                kana_id = deck.draw()
+            if kana_id is None:
+                break
+            last_asked = kana_id
+            result = self.runner.run_question(
+                kana_id, source=source, allow_hint=True, reverse=reverse
+            )
+            if result.quit:
+                self.report.quit_early = True
+                break
+            self.position += 1
+            self.report.total += 1
+            self.report.questions_asked += 1
+            if result.correct:
+                self.report.correct += 1
+            self.report.xp_gained += result.xp
+            card = self.save.card(kana_id)
+            if card.state is KanaState.MASTERED and kana_id not in self.report.mastered_new:
+                self.report.mastered_new.append(kana_id)
+
+        self._update_lesson_practice()
+        self.ui.show_summary(
+            "Kết thúc Review",
+            [
+                f"Đúng: {self.report.correct}/{self.report.total}",
+                f"XP nhận được: {self.report.xp_gained}",
+            ]
+            + (
+                [f"Kana mới đạt MASTERED: {', '.join(self.report.mastered_new)}"]
+                if self.report.mastered_new
+                else []
+            ),
+        )
+        return self.report
+
+    def _update_lesson_practice(self) -> None:
+        """Cập nhật last_practiced_at/total_attempts/accuracy cho lesson liên quan."""
+        if self.mode not in ("lesson", "multi"):
+            return
+        from kana_rush.models import LessonProgress
+
+        lesson_ids = []
+        if self.mode == "lesson":
+            lesson_id = self.settings.get("lesson_id")
+            if lesson_id is not None:
+                lesson_ids.append(int(lesson_id))
+        else:
+            lesson_ids = [int(i) for i in self.settings.get("lesson_ids", [])]
+        if not lesson_ids or self.report.total == 0:
+            return
+        accuracy = self.report.correct / self.report.total
+        for lesson_id in lesson_ids:
+            progress = self.save.lesson_progress.setdefault(
+                lesson_id, LessonProgress(lesson_id=lesson_id)
+            )
+            progress.last_practiced_at = self.now
+            progress.total_attempts += self.report.total
+            progress.accuracy = accuracy

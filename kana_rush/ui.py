@@ -224,7 +224,7 @@ class UI:
         )
         lines = [
             ("1", "Tiếp tục buổi học hôm nay"),
-            ("2", "Learn - Học kana mới"),
+            ("2", "Learn - Học Hiragana theo lesson"),
             ("3", "Review - Ôn kana đã học"),
             ("4", "Confusion Drill - Luyện chữ dễ nhầm"),
             ("5", "Word Bridge - Đọc từ ngắn"),
@@ -249,6 +249,111 @@ class UI:
         for key, label in options:
             self.say(f"[bold]{key}[/bold] {label}")
         return self.read_menu_choice()
+
+    # ---------------------------------------------------------- lesson menus
+    def lesson_select_menu(self, lessons, statuses) -> str | None:
+        """Menu chọn lesson với trạng thái từng lesson."""
+        self.say("[bold]HỌC HIRAGANA[/bold]")
+        for lesson, status in zip(lessons, statuses):
+            self.say(f"[bold]{lesson.id}.[/bold] {lesson.kana_label} [{status.value}]")
+        self.say("[bold]B[/bold] Quay lại")
+        self.say()
+        return self.read_menu_choice("Chọn lesson > ")
+
+    def lesson_detail_menu(self, lesson, status, mastered, due, accuracy, started) -> str | None:
+        """Chi tiết một lesson đã mở khóa: L (học) / R (review) / S (thống kê) / B (quay lại)."""
+        lines = [
+            f"Lesson {lesson.id} — {lesson.kana_label}",
+            f"Trạng thái: {status.value}",
+            f"Mastered: {mastered}/{len(lesson.kana)}",
+            f"Đến hạn: {due}",
+            f"Accuracy: {f'{accuracy:.0%}' if accuracy is not None else 'chưa đủ dữ liệu'}",
+        ]
+        self.panel("CHI TIẾT LESSON", lines)
+        if started:
+            self.say("[bold]L[/bold] Tiếp tục học")
+            self.say(f"[bold]R[/bold] Review Lesson {lesson.id}")
+            self.say("[bold]S[/bold] Xem chi tiết")
+        else:
+            self.say("[bold]L[/bold] Bắt đầu học")
+            self.say("[bold]S[/bold] Xem trước kana")
+        self.say("[bold]B[/bold] Quay lại")
+        raw = self.read_menu_choice("Chọn [L] [R] [S] [B] > ")
+        if raw is None:
+            return "b"
+        return raw.lower()
+
+    def review_type_menu(self) -> str | None:
+        """Menu chọn kiểu review."""
+        self.say("[bold]CHỌN KIỂU REVIEW[/bold]")
+        options = [
+            ("1", "Ôn kana đến hạn – SRS Recommended"),
+            ("2", "Ôn một lesson"),
+            ("3", "Ôn nhiều lesson"),
+            ("4", "Random từ tất cả kana đang học"),
+            ("5", "Smart Random – ưu tiên kana yếu"),
+            ("6", "Ôn toàn bộ kana đã mở khóa"),
+            ("7", "Confusion Drill"),
+            ("0", "Quay lại"),
+        ]
+        for key, label in options:
+            self.say(f"[bold]{key}[/bold] {label}")
+        self.say("[dim]Gợi ý: chọn [1] để nhớ lâu theo lịch SRS.[/dim]")
+        return self.read_menu_choice()
+
+    def single_lesson_menu(self, lessons) -> str | None:
+        """Chọn chính xác một lesson đã bắt đầu/hoàn thành."""
+        self.say("[bold]CHỌN MỘT LESSON[/bold]")
+        for lesson in lessons:
+            self.say(f"[bold]{lesson.id}.[/bold] {lesson.kana_label}")
+        return self.read_menu_choice("Lesson > ")
+
+    def review_size_menu(self, kind: str) -> str | None:
+        """Chọn số câu; kind='single' dùng menu 4 mục, kind='multi' dùng 6 mục."""
+        if kind == "single":
+            options = [
+                ("1", "Quick – 10 câu"),
+                ("2", "Standard – 20 câu"),
+                ("3", "Full – ôn toàn bộ kana trong lesson"),
+                ("4", "Endless – dừng khi người chơi yêu cầu"),
+            ]
+        elif kind == "multi":
+            options = [
+                ("1", "10 câu"),
+                ("2", "20 câu"),
+                ("3", "30 câu"),
+                ("4", "Mỗi kana một lần"),
+                ("5", "Mỗi kana hai lần"),
+                ("6", "Endless"),
+            ]
+        else:
+            options = [
+                ("1", "10 câu"),
+                ("2", "20 câu"),
+                ("3", "30 câu"),
+                ("4", "Endless"),
+            ]
+        self.say("[bold]CHỌN SỐ CÂU[/bold]")
+        for key, label in options:
+            self.say(f"[bold]{key}[/bold] {label}")
+        return self.read_menu_choice("Chọn số câu > ")
+
+    def confirm_multi_lessons(self, lines: list[str], total_kana: int) -> str:
+        """Xác nhận review nhiều lesson: Enter bắt đầu / C thay đổi / Q hủy."""
+        content = "\n".join(lines) + f"\n\nTổng số kana trong pool: {total_kana}"
+        self.panel("BẠN SẼ REVIEW", content)
+        self.say("[Enter] Bắt đầu   [C] Thay đổi lựa chọn   [Q] Hủy")
+        raw = self._read_line("Chọn > ")
+        if raw is None:
+            return ""
+        return normalize_answer(raw)
+
+    def direction_menu(self) -> str | None:
+        """Chọn hướng câu hỏi cho Random Review."""
+        self.say("[bold]DIRECTION[/bold]")
+        self.say("[bold]1.[/bold] Kana → Romaji")
+        self.say("[bold]2.[/bold] Romaji → Kana")
+        return self.read_menu_choice("Chọn hướng > ")
 
     # ---------------------------------------------------------- misc
     def show_summary(self, title: str, lines: list[str]) -> None:
