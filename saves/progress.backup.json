@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "created_at": "2026-08-08T03:50:13.485968+00:00",
-  "updated_at": "2026-08-13T14:55:14.397891+00:00",
-  "session_id": "20260813142518-c627b0",
-  "session_count": 12,
-  "total_study_seconds": 16424.74,
-  "xp": 30107,
-  "streak": 22,
+  "updated_at": "2026-08-13T15:29:20.024224+00:00",
+  "session_id": "20260813152355-621327",
+  "session_count": 13,
+  "total_study_seconds": 16771.573,
+  "xp": 31469,
+  "streak": 10,
   "best_streak": 96,
   "day_streak": 1,
   "last_active_date": "2026-08-13",
@@ -790,11 +790,11 @@
       "state": "mastered",
       "learning_step": 3,
       "review_stage": 6,
-      "next_review_at": "2026-09-12T14:39:13.145752+00:00",
-      "last_reviewed_at": "2026-08-13T14:39:13.145752+00:00",
+      "next_review_at": "2026-09-12T15:24:21.110573+00:00",
+      "last_reviewed_at": "2026-08-13T15:24:21.110573+00:00",
       "introduced_at": "2026-08-08T06:43:19.336264+00:00",
-      "correct_unaided": 43,
-      "correct_with_hint": 7,
+      "correct_unaided": 44,
+      "correct_with_hint": 9,
       "wrong_count": 0,
       "lapse_count": 0,
       "session_ids_correct": [
@@ -805,36 +805,10 @@
         "20260809140238-0769c2",
         "20260809154536-aa3a61",
         "20260810164552-20f484",
-        "20260813142518-c627b0"
+        "20260813142518-c627b0",
+        "20260813152355-621327"
       ],
       "recent_results": [
-        {
-          "ts": "2026-08-09T14:15:08.583038+00:00",
-          "session_id": "20260809140238-0769c2",
-          "correct": true,
-          "hinted": false,
-          "rt_ms": 4502,
-          "confusion": null,
-          "source": "review"
-        },
-        {
-          "ts": "2026-08-09T14:15:37.321392+00:00",
-          "session_id": "20260809140238-0769c2",
-          "correct": true,
-          "hinted": false,
-          "rt_ms": 1958,
-          "confusion": null,
-          "source": "review"
-        },
-        {
-          "ts": "2026-08-09T14:15:37.321392+00:00",
-          "session_id": "20260809140238-0769c2",
-          "correct": true,
-          "hinted": false,
-          "rt_ms": 1342,
-          "confusion": null,
-          "source": "review"
-        },
         {
           "ts": "2026-08-09T14:15:37.321392+00:00",
           "session_id": "20260809140238-0769c2",
@@ -1077,6 +1051,33 @@
           "rt_ms": 1455,
           "confusion": null,
           "source": "review"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": true,
+          "hinted": true,
+          "rt_ms": 800,
+          "confusion": null,
+          "source": "confusion"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": true,
+          "hinted": true,
+          "rt_ms": 800,
+          "confusion": null,
+          "source": "confusion"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1742,
+          "confusion": null,
+          "source": "lesson"
         }
       ],
       "response_times_ms": [
@@ -1129,11 +1130,14 @@
         1621,
         1022,
         1021,
-        1455
+        1455,
+        800,
+        800,
+        1742
       ],
       "confused_with": {},
       "mastery_score": 0.895,
-      "stability": 13.35,
+      "stability": 13.75,
       "difficulty": 0.05
     },
     "こ": {
@@ -1694,17 +1698,19 @@
       "difficulty": 0.65
     },
     "ち": {
-      "state": "new",
-      "learning_step": 0,
+      "state": "review",
+      "learning_step": 3,
       "review_stage": 0,
-      "next_review_at": null,
-      "last_reviewed_at": "2026-08-08T03:50:22.471729+00:00",
-      "introduced_at": null,
-      "correct_unaided": 0,
-      "correct_with_hint": 0,
+      "next_review_at": "2026-08-13T15:24:21.110573+00:00",
+      "last_reviewed_at": "2026-08-13T15:24:21.110573+00:00",
+      "introduced_at": "2026-08-13T15:24:21.110573+00:00",
+      "correct_unaided": 3,
+      "correct_with_hint": 1,
       "wrong_count": 1,
       "lapse_count": 0,
-      "session_ids_correct": [],
+      "session_ids_correct": [
+        "20260813152355-621327"
+      ],
       "recent_results": [
         {
           "ts": "2026-08-08T03:50:22.471729+00:00",
@@ -1714,17 +1720,57 @@
           "rt_ms": 614,
           "confusion": "あ",
           "source": "diagnostic"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2486,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 6279,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": true,
+          "hinted": true,
+          "rt_ms": 800,
+          "confusion": null,
+          "source": "confusion"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1813,
+          "confusion": null,
+          "source": "lesson"
         }
       ],
       "response_times_ms": [
-        614
+        614,
+        2486,
+        6279,
+        800,
+        1813
       ],
       "confused_with": {
         "あ": 1
       },
-      "mastery_score": 0.0,
-      "stability": 0.35,
-      "difficulty": 0.65
+      "mastery_score": 0.401,
+      "stability": 1.1,
+      "difficulty": 0.53
     },
     "ふ": {
       "state": "new",
@@ -2196,17 +2242,19 @@
       "difficulty": 0.05
     },
     "て": {
-      "state": "new",
-      "learning_step": 0,
+      "state": "review",
+      "learning_step": 3,
       "review_stage": 0,
-      "next_review_at": null,
-      "last_reviewed_at": "2026-08-08T03:50:22.471729+00:00",
-      "introduced_at": null,
-      "correct_unaided": 0,
+      "next_review_at": "2026-08-13T15:24:21.110573+00:00",
+      "last_reviewed_at": "2026-08-13T15:24:21.110573+00:00",
+      "introduced_at": "2026-08-13T15:24:21.110573+00:00",
+      "correct_unaided": 5,
       "correct_with_hint": 0,
       "wrong_count": 1,
       "lapse_count": 0,
-      "session_ids_correct": [],
+      "session_ids_correct": [
+        "20260813152355-621327"
+      ],
       "recent_results": [
         {
           "ts": "2026-08-08T03:50:22.471729+00:00",
@@ -2216,15 +2264,65 @@
           "rt_ms": 358,
           "confusion": null,
           "source": "diagnostic"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 670,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 5702,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 6038,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 42780,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1262,
+          "confusion": null,
+          "source": "lesson"
         }
       ],
       "response_times_ms": [
-        358
+        358,
+        670,
+        5702,
+        6038,
+        42780,
+        1262
       ],
       "confused_with": {},
-      "mastery_score": 0.0,
-      "stability": 0.5,
-      "difficulty": 0.6
+      "mastery_score": 0.5063,
+      "stability": 1.7,
+      "difficulty": 0.45
     },
     "う": {
       "state": "mastered",
@@ -3819,19 +3917,20 @@
       "difficulty": 0.65
     },
     "た": {
-      "state": "relearning",
+      "state": "review",
       "learning_step": 3,
       "review_stage": 0,
-      "next_review_at": "2026-08-08T15:26:14.286102+00:00",
-      "last_reviewed_at": "2026-08-08T15:26:14.286102+00:00",
+      "next_review_at": "2026-08-13T15:24:21.110573+00:00",
+      "last_reviewed_at": "2026-08-13T15:24:21.110573+00:00",
       "introduced_at": "2026-08-08T04:01:12.783297+00:00",
-      "correct_unaided": 4,
-      "correct_with_hint": 1,
+      "correct_unaided": 11,
+      "correct_with_hint": 2,
       "wrong_count": 3,
       "lapse_count": 2,
       "session_ids_correct": [
         "20260808035013-006a99",
-        "20260808043112-3c8b73"
+        "20260808043112-3c8b73",
+        "20260813152355-621327"
       ],
       "recent_results": [
         {
@@ -3905,6 +4004,78 @@
           "rt_ms": 11190,
           "confusion": null,
           "source": "review"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 3870,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 4334,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": true,
+          "hinted": true,
+          "rt_ms": 800,
+          "confusion": null,
+          "source": "confusion"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 4350,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 3078,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2653,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1718,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1589,
+          "confusion": null,
+          "source": "lesson"
         }
       ],
       "response_times_ms": [
@@ -3915,15 +4086,23 @@
         7429,
         3529,
         800,
-        11190
+        11190,
+        3870,
+        4334,
+        800,
+        4350,
+        3078,
+        2653,
+        1718,
+        1589
       ],
       "confused_with": {
         "こ": 1,
         "て": 1
       },
-      "mastery_score": 0.2561,
-      "stability": 0.2787,
-      "difficulty": 0.75
+      "mastery_score": 0.5861,
+      "stability": 1.9287,
+      "difficulty": 0.51
     },
     "や": {
       "state": "new",
@@ -4302,82 +4481,20 @@
       "state": "review",
       "learning_step": 3,
       "review_stage": 6,
-      "next_review_at": "2026-09-12T14:49:06.875463+00:00",
-      "last_reviewed_at": "2026-08-13T14:49:06.875463+00:00",
+      "next_review_at": "2026-09-12T15:24:21.110573+00:00",
+      "last_reviewed_at": "2026-08-13T15:24:21.110573+00:00",
       "introduced_at": "2026-08-08T15:23:47.060148+00:00",
-      "correct_unaided": 44,
+      "correct_unaided": 49,
       "correct_with_hint": 1,
-      "wrong_count": 5,
-      "lapse_count": 4,
+      "wrong_count": 7,
+      "lapse_count": 5,
       "session_ids_correct": [
         "20260808152203-62739c",
         "20260810164552-20f484",
-        "20260813142518-c627b0"
+        "20260813142518-c627b0",
+        "20260813152355-621327"
       ],
       "recent_results": [
-        {
-          "ts": "2026-08-10T16:57:45.718584+00:00",
-          "session_id": "20260810164552-20f484",
-          "correct": true,
-          "hinted": false,
-          "rt_ms": 3518,
-          "confusion": null,
-          "source": "lesson"
-        },
-        {
-          "ts": "2026-08-10T17:04:40.406777+00:00",
-          "session_id": "20260810164552-20f484",
-          "correct": true,
-          "hinted": false,
-          "rt_ms": 3926,
-          "confusion": null,
-          "source": "review"
-        },
-        {
-          "ts": "2026-08-10T17:04:40.406777+00:00",
-          "session_id": "20260810164552-20f484",
-          "correct": true,
-          "hinted": false,
-          "rt_ms": 184241,
-          "confusion": null,
-          "source": "review"
-        },
-        {
-          "ts": "2026-08-10T17:04:40.406777+00:00",
-          "session_id": "20260810164552-20f484",
-          "correct": true,
-          "hinted": false,
-          "rt_ms": 1102,
-          "confusion": null,
-          "source": "review"
-        },
-        {
-          "ts": "2026-08-10T17:04:40.406777+00:00",
-          "session_id": "20260810164552-20f484",
-          "correct": true,
-          "hinted": false,
-          "rt_ms": 942,
-          "confusion": null,
-          "source": "review"
-        },
-        {
-          "ts": "2026-08-10T17:04:40.406777+00:00",
-          "session_id": "20260810164552-20f484",
-          "correct": true,
-          "hinted": false,
-          "rt_ms": 1334,
-          "confusion": null,
-          "source": "review"
-        },
-        {
-          "ts": "2026-08-10T17:04:40.406777+00:00",
-          "session_id": "20260810164552-20f484",
-          "correct": true,
-          "hinted": false,
-          "rt_ms": 2494,
-          "confusion": null,
-          "source": "review"
-        },
         {
           "ts": "2026-08-10T17:04:40.406777+00:00",
           "session_id": "20260810164552-20f484",
@@ -4584,6 +4701,69 @@
           "rt_ms": 1150,
           "confusion": null,
           "source": "lesson"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": false,
+          "hinted": true,
+          "rt_ms": 1341,
+          "confusion": "た",
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": false,
+          "hinted": true,
+          "rt_ms": 6117,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2997,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2069,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 973,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 966,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 3268,
+          "confusion": null,
+          "source": "lesson"
         }
       ],
       "response_times_ms": [
@@ -4636,17 +4816,25 @@
         1030,
         782,
         702,
-        1150
+        1150,
+        1341,
+        6117,
+        2997,
+        2069,
+        973,
+        966,
+        3268
       ],
       "confused_with": {
         "え": 1,
         "す": 1,
         "せ": 2,
-        "か": 1
+        "か": 1,
+        "た": 1
       },
-      "mastery_score": 0.689,
-      "stability": 4.8511,
-      "difficulty": 0.05
+      "mastery_score": 0.437,
+      "stability": 2.0489,
+      "difficulty": 0.15
     },
     "ひ": {
       "state": "new",
@@ -5737,17 +5925,19 @@
       "difficulty": 0.65
     },
     "と": {
-      "state": "new",
-      "learning_step": 0,
+      "state": "review",
+      "learning_step": 3,
       "review_stage": 0,
-      "next_review_at": null,
-      "last_reviewed_at": "2026-08-08T03:50:22.471729+00:00",
-      "introduced_at": null,
-      "correct_unaided": 0,
+      "next_review_at": "2026-08-13T15:24:21.110573+00:00",
+      "last_reviewed_at": "2026-08-13T15:24:21.110573+00:00",
+      "introduced_at": "2026-08-13T15:24:21.110573+00:00",
+      "correct_unaided": 4,
       "correct_with_hint": 0,
       "wrong_count": 1,
       "lapse_count": 0,
-      "session_ids_correct": [],
+      "session_ids_correct": [
+        "20260813152355-621327"
+      ],
       "recent_results": [
         {
           "ts": "2026-08-08T03:50:22.471729+00:00",
@@ -5757,17 +5947,57 @@
           "rt_ms": 2455,
           "confusion": "お",
           "source": "diagnostic"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1246,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2190,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 4399,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1621,
+          "confusion": null,
+          "source": "lesson"
         }
       ],
       "response_times_ms": [
-        2455
+        2455,
+        1246,
+        2190,
+        4399,
+        1621
       ],
       "confused_with": {
         "お": 1
       },
-      "mastery_score": 0.0,
-      "stability": 0.35,
-      "difficulty": 0.65
+      "mastery_score": 0.441,
+      "stability": 1.35,
+      "difficulty": 0.53
     },
     "え": {
       "state": "mastered",
@@ -6142,17 +6372,19 @@
       "difficulty": 0.65
     },
     "つ": {
-      "state": "new",
-      "learning_step": 0,
+      "state": "review",
+      "learning_step": 3,
       "review_stage": 0,
-      "next_review_at": null,
-      "last_reviewed_at": "2026-08-08T03:50:22.471729+00:00",
-      "introduced_at": null,
-      "correct_unaided": 0,
+      "next_review_at": "2026-08-13T15:24:21.110573+00:00",
+      "last_reviewed_at": "2026-08-13T15:24:21.110573+00:00",
+      "introduced_at": "2026-08-13T15:24:21.110573+00:00",
+      "correct_unaided": 4,
       "correct_with_hint": 0,
       "wrong_count": 1,
       "lapse_count": 0,
-      "session_ids_correct": [],
+      "session_ids_correct": [
+        "20260813152355-621327"
+      ],
       "recent_results": [
         {
           "ts": "2026-08-08T03:50:22.471729+00:00",
@@ -6162,17 +6394,57 @@
           "rt_ms": 366,
           "confusion": "あ",
           "source": "diagnostic"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1662,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 2317,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 3110,
+          "confusion": null,
+          "source": "lesson"
+        },
+        {
+          "ts": "2026-08-13T15:24:21.110573+00:00",
+          "session_id": "20260813152355-621327",
+          "correct": true,
+          "hinted": false,
+          "rt_ms": 1845,
+          "confusion": null,
+          "source": "lesson"
         }
       ],
       "response_times_ms": [
-        366
+        366,
+        1662,
+        2317,
+        3110,
+        1845
       ],
       "confused_with": {
         "あ": 1
       },
-      "mastery_score": 0.0,
-      "stability": 0.35,
-      "difficulty": 0.65
+      "mastery_score": 0.441,
+      "stability": 1.35,
+      "difficulty": 0.53
     },
     "の": {
       "state": "new",
@@ -6700,7 +6972,8 @@
       "え": 1,
       "す": 1,
       "せ": 2,
-      "か": 1
+      "か": 1,
+      "た": 1
     },
     "ひ": {
       "う": 1
@@ -7142,6 +7415,25 @@
       "last_practiced_at": "2026-08-13T14:49:06.875463+00:00",
       "total_attempts": 258,
       "accuracy": 0.9756
+    },
+    "4": {
+      "lesson_id": 4,
+      "introduced_kana": [
+        "た",
+        "ち",
+        "つ",
+        "て",
+        "と"
+      ],
+      "completed_subgroups": [
+        0
+      ],
+      "learn_completed": true,
+      "started_at": "2026-08-13T15:24:21.110573+00:00",
+      "completed_at": "2026-08-13T15:24:21.110573+00:00",
+      "last_practiced_at": "2026-08-13T15:24:21.110573+00:00",
+      "total_attempts": 31,
+      "accuracy": 0.9355
     }
   },
   "settings": {},
